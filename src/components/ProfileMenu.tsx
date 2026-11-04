@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { useServerFn } from "@tanstack/react-start";
 import {
   LayoutDashboard,
@@ -24,9 +25,8 @@ import { UserAvatar } from "@/components/UserAvatar";
 import { mastodonAvatarSrc } from "@/lib/mastodon-avatar";
 import { profileImageSrc } from "@/lib/image-proxy-rules";
 import { useScope, useWorkspaceContext } from "@/components/WorkspaceSwitcher";
-import { DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger } from "@/components/ui/dropdown-menu";
 import { WorkspaceIcon } from "@/components/workspace/WorkspaceIcon";
-import { Shield, ArrowLeftRight, Check as CheckIcon, Plus as PlusIcon, User as UserIcon } from "lucide-react";
+import { Shield, ArrowLeft, ArrowLeftRight, Check as CheckIcon, Plus as PlusIcon, User as UserIcon } from "lucide-react";
 import { canUseDeveloperTools } from "@/lib/workspace-rules";
 import { getMyAccount } from "@/lib/account.functions";
 import { contextBadge, contextLinks, GLOBAL_ACCOUNT_LINK } from "@/lib/context-menu";
@@ -52,6 +52,9 @@ export function ProfileMenu() {
   const [earlyBeliever, setEarlyBeliever] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [workspaceView, setWorkspaceView] = useState(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const reducedMotion = useReducedMotion();
   const loadAccount = useServerFn(getMyAccount);
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -130,7 +133,7 @@ export function ProfileMenu() {
 
   return (
     <div className="flex items-center gap-3 sm:gap-4">
-      <HeaderControl name="account"><DropdownMenu open={menuOpen} onOpenChange={(open) => { setMenuOpen(open); spatialHaptic(); }}>
+      <HeaderControl name="account"><DropdownMenu open={menuOpen} onOpenChange={(open) => { setMenuOpen(open); if (!open) setWorkspaceView(false); spatialHaptic(); }}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost"
             type="button"
@@ -148,7 +151,10 @@ export function ProfileMenu() {
           </Button>
         </DropdownMenuTrigger>
 
-        <SpatialDropdownMenuContent open={menuOpen} align="end" collisionPadding={16} className="max-h-[70vh] w-[calc(100vw-2rem)] max-w-72 overflow-y-auto">
+        <SpatialDropdownMenuContent open={menuOpen} align="end" collisionPadding={16} className="max-h-[70vh] w-[calc(100vw-2rem)] max-w-72 overflow-x-hidden overflow-y-auto"
+          onTouchStart={(event) => { const touch = event.touches[0]; if (touch) touchStart.current = { x: touch.clientX, y: touch.clientY }; }}
+          onTouchEnd={(event) => { const touch = event.changedTouches[0]; const start = touchStart.current; touchStart.current = null; if (!touch || !start) return; const dx = touch.clientX - start.x; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(touch.clientY - start.y) * 1.5) setWorkspaceView(dx < 0); }}>
+          <motion.div key={workspaceView ? "workspaces" : "account"} initial={reducedMotion ? false : { x: workspaceView ? 24 : -24, opacity: 0.7 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: reducedMotion ? 0 : 0.18 }}>
           <div className="px-2 py-2">
             <div className="flex items-center gap-2">
               <p className="truncate text-sm font-medium">{displayName}</p>
@@ -163,21 +169,22 @@ export function ProfileMenu() {
             </div>
             <p className="truncate text-xs text-muted-foreground">{user.email}</p>
           </div>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="gap-2" disabled={scopeApi.busy} aria-label="Wissel van account of workspace">
+          <DropdownMenuItem className="min-h-11 gap-2" disabled={scopeApi.busy} aria-label={workspaceView ? "Terug naar accountmenu" : "Wissel van account of workspace"} onSelect={(event) => { event.preventDefault(); setWorkspaceView(!workspaceView); }}>
+              {workspaceView && <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />}
               {scopeApi.active ? <WorkspaceIcon avatarUrl={scopeApi.active.avatarUrl} icon={scopeApi.active.icon} category={scopeApi.active.category} /> : <UserIcon className="h-4 w-4 shrink-0" aria-hidden />}
-              <span className="truncate">{scopeApi.active ? scopeApi.active.name : "Persoonlijk"}</span>
-              <ArrowLeftRight className="ml-auto h-3.5 w-3.5 text-muted-foreground" aria-hidden />
-            </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent collisionPadding={12} className="spatial-glass max-h-[60vh] w-[min(15rem,calc(100vw-1.5rem))] overflow-y-auto">
-              <DropdownMenuItem onClick={() => scopeApi.switchTo(null)} className="gap-2">
+              <span className="min-w-0 flex-1 truncate">{scopeApi.active ? scopeApi.active.name : "Persoonlijk"}</span>
+              <ArrowLeftRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden />
+          </DropdownMenuItem>
+          {workspaceView ? <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem disabled={scopeApi.busy} onClick={() => scopeApi.switchTo(null)} className="min-h-11 gap-2">
                 <UserIcon className="h-4 w-4" aria-hidden /> Persoonlijk
                 {!scopeApi.active && <CheckIcon className="ml-auto h-4 w-4" aria-hidden />}
               </DropdownMenuItem>
               {scopeApi.workspaces.map((w) => (
-                <DropdownMenuItem key={w.id} onClick={() => scopeApi.switchTo(w.id)} className="gap-2">
+                <DropdownMenuItem key={w.id} disabled={scopeApi.busy} onClick={() => scopeApi.switchTo(w.id)} className="min-h-11 gap-2">
                   <WorkspaceIcon avatarUrl={w.avatarUrl} icon={w.icon} category={w.category} />
-                  <span className="truncate">{w.name}</span>
+                  <span className="min-w-0 flex-1 truncate">{w.name}</span>
                   {w.id === scopeApi.active?.id && <CheckIcon className="ml-auto h-4 w-4" aria-hidden />}
                 </DropdownMenuItem>
               ))}
@@ -185,8 +192,7 @@ export function ProfileMenu() {
               <DropdownMenuItem onClick={scopeApi.newWorkspace} className="gap-2">
                 <PlusIcon className="h-4 w-4" aria-hidden /> Nieuwe workspace
               </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
+          </> : <>
           <DropdownMenuSeparator />
           <div className="flex items-center gap-2 px-2 py-1.5 text-xs">
             <span className="truncate font-medium">{badge.label}</span>
@@ -222,6 +228,8 @@ export function ProfileMenu() {
           >
             <LogOut className="h-4 w-4 shrink-0" aria-hidden /> Uitloggen
           </DropdownMenuItem>
+          </>}
+          </motion.div>
         </SpatialDropdownMenuContent>
       </DropdownMenu></HeaderControl>
     </div>
