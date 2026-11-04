@@ -117,6 +117,7 @@ export function ProfileWidgetsAccordion({
             }}
           />
           <StudioToggleCard
+            unframed
             icon={<StudioSectionIcon kind="badges" />}
             title={t("studio.badgesFolder").replace(/^\p{Extended_Pictographic}\s*/u, "")}
             subtitle={t("studio.editor.badgesHelp")}
