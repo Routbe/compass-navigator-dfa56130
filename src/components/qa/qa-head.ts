@@ -23,6 +23,8 @@ export function qaAskHead(handle: string, space: QaSpace) {
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
+      // Snapchat Creative Kit: sticker shown on the snap that carries this tappable link.
+      { property: "snapchat:sticker", content: "https://rout.be/icon-512.png" },
     ],
     links: [{ rel: "canonical", href: `https://rout.be${path}` }],
   };

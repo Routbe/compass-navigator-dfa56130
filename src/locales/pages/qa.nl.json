@@ -164,5 +164,9 @@
   "pages.qa.inbox.when.yesterday": "Gisteren",
   "pages.qa.inbox.when.yesterdayEvening": "Gisteravond",
   "pages.qa.inbox.when.fewDays": "Een paar dagen geleden",
-  "pages.qa.inbox.when.fewWeeks": "Een paar weken geleden"
+  "pages.qa.inbox.when.fewWeeks": "Een paar weken geleden",
+  "pages.qa.share.instagram": "Instagram-story",
+  "pages.qa.share.igCopied": "Link gekopieerd. Tik in Instagram op de sticker-knop → Link en plak hem.",
+  "pages.qa.share.igSteps": "Instagram: kies je story, tik op de sticker-knop → Link en plak. Zo kunnen volgers erop tikken.",
+  "pages.qa.share.snapSteps": "Snapchat: de link zit al aan je snap vast. Kijkers vegen omhoog of tikken om je een vraag te sturen."
 }

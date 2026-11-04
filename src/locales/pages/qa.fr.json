@@ -164,5 +164,9 @@
   "pages.qa.inbox.when.yesterday": "Hier",
   "pages.qa.inbox.when.yesterdayEvening": "Hier soir",
   "pages.qa.inbox.when.fewDays": "Il y a quelques jours",
-  "pages.qa.inbox.when.fewWeeks": "Il y a quelques semaines"
+  "pages.qa.inbox.when.fewWeeks": "Il y a quelques semaines",
+  "pages.qa.share.instagram": "Story Instagram",
+  "pages.qa.share.igCopied": "Lien copié. Dans Instagram, touchez le bouton sticker → Lien et collez-le.",
+  "pages.qa.share.igSteps": "Instagram : choisissez votre story, touchez le bouton sticker → Lien et collez. Vos abonnés pourront le toucher.",
+  "pages.qa.share.snapSteps": "Snapchat : le lien est déjà attaché à votre snap. Les spectateurs balaient vers le haut ou touchent pour vous envoyer une question."
 }
