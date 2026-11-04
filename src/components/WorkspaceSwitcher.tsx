@@ -43,7 +43,8 @@ export function useScope() {
     : { type: "personal", userId: null };
 
   const switchTo = async (workspaceId: string | null) => {
-    if (!available) return;
+    if (busy) return;
+    if (!available) { toast.error(t("workspace.switchError")); return; }
     if ((active?.id ?? null) === workspaceId) return;
     setBusy(true);
     try {
@@ -51,10 +52,12 @@ export function useScope() {
       await qc.cancelQueries();
       qc.clear();
       const slug = workspaceList.find((w) => w.id === workspaceId)?.slug ?? null;
-      void navigate({ to: scopedPath(slug, featureForPath(window.location.pathname)) as never });
+      const target = scopedPath(slug, featureForPath(window.location.pathname));
+      // Full navigation guarantees the new HttpOnly scope cookie is used by every
+      // loader and server function; a same-path client navigation could look like "nothing happened".
+      window.location.assign(target);
     } catch {
       toast.error(t("workspace.switchError"));
-    } finally {
       setBusy(false);
     }
   };
