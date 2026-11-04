@@ -317,7 +317,20 @@ export function RoutCardDialog({ open, onOpenChange, handle, space }: { open: bo
   const enableGyro = async () => {
     const D = (window as unknown as { DeviceOrientationEvent?: { requestPermission?: () => Promise<string> } }).DeviceOrientationEvent;
     try {
-      if (D?.requestPermission && (await D.requestPermission()) !== "granted") return;
+      if (!D || !window.isSecureContext) throw new Error("unavailable");
+      if (D.requestPermission && (await D.requestPermission()) !== "granted") throw new Error("denied");
+      // Only switch off the touch/mouse fallback once the sensor actually reports angles.
+      const works = await new Promise<boolean>((resolve) => {
+        const timer = window.setTimeout(() => { window.removeEventListener("deviceorientation", probe); resolve(false); }, 1200);
+        function probe(e: DeviceOrientationEvent) {
+          if (e.beta == null || e.gamma == null) return;
+          window.clearTimeout(timer);
+          window.removeEventListener("deviceorientation", probe);
+          resolve(true);
+        }
+        window.addEventListener("deviceorientation", probe);
+      });
+      if (!works) throw new Error("silent");
       setGyro(true);
     } catch {
       toast.error(t("card.gyroDenied"));
