@@ -35,8 +35,8 @@ export function DocsLayout({ doc, children }: { doc: DocEntry; children: ReactNo
   }, [doc]);
   return <AppLayout width="full"><div className={`docs-theme text-foreground ${doc.category === "dev" ? "docs-developer" : "docs-public"}`}>
     <a href="#docs-content" className="docs-skip">{t("docs.skip")}</a>
-    <div className="sticky top-[4.75rem] z-40 px-3 sm:px-5">
-      <div className="docs-header mx-auto flex min-h-14 max-w-[1600px] items-center justify-between gap-3 rounded-2xl border border-border px-4 py-2.5 shadow-sm lg:px-6">
+    <div className="sticky top-[4.75rem] z-40 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
+      <div className="docs-header mx-auto flex min-h-14 items-center justify-between gap-3 rounded-lg border border-border px-3 py-2.5 shadow-sm lg:px-6">
         <div className="flex items-center gap-3"><Button variant="ghost" size="icon" className="lg:hidden" aria-label={open ? t("docs.closeNav") : t("docs.openNav")} aria-expanded={open} aria-controls="docs-sidebar" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button><span className="hidden font-mono text-xs text-muted-foreground sm:block">{DOC_LABELS[doc.category]}</span></div>
         <div className="relative w-full max-w-80"><Search className="absolute left-3 top-3 size-4 text-muted-foreground" aria-hidden /><Input value={query} onChange={e => setQuery(e.target.value)} aria-label={t("docs.search")} placeholder={t("docs.search")} className="bg-card pl-10" />{query && <div className="absolute left-0 right-0 top-13 rounded-lg border border-border bg-popover p-2 shadow-lg">{results.length ? results.map(d => <Link key={d.path} to={d.path} className="block rounded p-3 text-sm hover:bg-secondary">{d.title}<span className="mt-1 block text-xs text-muted-foreground">{DOC_LABELS[d.category]}</span></Link>) : <p className="p-3 text-sm text-muted-foreground">{t("docs.noResults")}</p>}</div>}</div>
         {doc.category === "dev" && <Button asChild variant="ghost" className="hidden sm:inline-flex"><Link to="/console">Console <ArrowUpRight /></Link></Button>}

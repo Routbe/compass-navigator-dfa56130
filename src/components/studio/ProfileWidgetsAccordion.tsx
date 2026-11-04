@@ -16,11 +16,11 @@ import { isProfileSectionKind, PROFILE_SECTION_LABELS } from "@/lib/profile-sect
 import type { ProfileBlock } from "@/lib/profile";
 import type { ProfileDisplayPrefs } from "@/lib/profile-display";
 import type { QaSpace } from "@/components/qa/useQaPublic";
+import { isStudioWidget } from "@/lib/studio-widget-rules";
 
 type SetPref = <K extends keyof ProfileDisplayPrefs>(key: K, value: ProfileDisplayPrefs[K]) => void;
 
 /** Blokken die als widget op het profiel liggen en een afmeting krijgen. */
-const SIZED_WIDGET_KINDS = ["live", "audio_player", "media_gallery", "countdown", "newsletter", "feedback", "contact_form", "live_poll"] as const;
 
 interface Props {
   blocks: ProfileBlock[];
@@ -68,7 +68,7 @@ export function ProfileWidgetsAccordion({
   const [libraryOpen, setLibraryOpen] = useState(false);
 
   const sizedBlocks = blocks.filter(
-    (b) => b.kind.startsWith("widget:") || (SIZED_WIDGET_KINDS as readonly string[]).includes(b.kind),
+    (b) => isStudioWidget(b.kind),
   );
   const fixedActive = [
     !isWorkspace && prefs.questionsEnabled && prefs.qaOnHub,
@@ -83,7 +83,7 @@ export function ProfileWidgetsAccordion({
   return (
     <AccordionItem value="widgets" className="acrylic-card px-4 sm:px-5">
       <AccordionTrigger className="hover:no-underline">
-        <span className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 pr-2">
+        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 pr-2">
           <span className="flex min-w-0 items-center gap-2 text-base font-medium">
             <StudioSectionIcon kind="content" />{t("studio.widgets.title")}
           </span>
@@ -93,7 +93,6 @@ export function ProfileWidgetsAccordion({
         </span>
       </AccordionTrigger>
       <AccordionContent className="space-y-4 pb-5">
-        <p className="text-sm text-muted-foreground">{t("studio.widgets.help")}</p>
 
         {/* Vaste widgets: altijd zichtbaar, direct aan/uit — nooit achter een modal. */}
         <div className="space-y-3">
@@ -111,6 +110,7 @@ export function ProfileWidgetsAccordion({
             />
           )}
           <GuestbookAccordion
+            unframed
             enabled={prefs.guestbookEnabled}
             onEnabledChange={(v) => {
               onPref("guestbookEnabled", v);
@@ -118,6 +118,7 @@ export function ProfileWidgetsAccordion({
             }}
           />
           <StudioToggleCard
+            unframed
             icon={<StudioSectionIcon kind="badges" />}
             title={t("studio.badgesFolder").replace(/^\p{Extended_Pictographic}\s*/u, "")}
             subtitle={t("studio.editor.badgesHelp")}

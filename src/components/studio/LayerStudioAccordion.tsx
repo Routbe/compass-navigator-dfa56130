@@ -73,7 +73,7 @@ function Range({ label, value, min, max, onChange }: { label: string; value: num
 
 function RowTools({ visible, onToggle, onUp, onDown, onDelete }: { visible: boolean; onToggle: () => void; onUp: () => void; onDown: () => void; onDelete?: () => void }) {
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex shrink-0 items-center gap-0.5">
       <Button type="button" size="icon" variant="ghost" className="h-7 w-7" onClick={onToggle} aria-label={visible ? "Verbergen" : "Tonen"}>
         {visible ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
       </Button>
@@ -115,15 +115,15 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
     set({ ...layers, decorations: layers.decorations.map((d, j) => (j === i ? { ...d, ...patch } : d)) });
 
   return (
-    <AccordionItem value="layers" className="rounded-2xl border border-border bg-card px-4">
-      <AccordionTrigger className="text-sm font-medium">
-        <span className="flex items-center gap-2"><StudioSectionIcon kind="layers" /> Lagen-studio</span>
+    <AccordionItem value="layers" className="acrylic-card px-4 sm:px-5">
+      <AccordionTrigger className="text-base font-medium hover:no-underline">
+        <span className="flex min-w-0 items-center gap-2"><StudioSectionIcon kind="layers" /> Lagen-studio</span>
       </AccordionTrigger>
       <AccordionContent className="space-y-6 pb-5">
         <section className="space-y-3">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Profielkop</p>
-          {(layers.identityOrder ?? [...IDENTITY_PARTS]).map((part, i, order) => <div key={part} className="flex items-center justify-between rounded-lg border border-border px-3 py-2">
-            <span className="text-sm">{{ name: "Naam", handle: "@gebruikersnaam", location: "Locatie", bio: "Bio" }[part]}</span>
+          {(layers.identityOrder ?? [...IDENTITY_PARTS]).map((part, i, order) => <div key={part} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border py-2">
+            <span className="min-w-0 break-words text-sm">{{ name: "Naam", handle: "@gebruikersnaam", location: "Locatie", bio: "Bio" }[part]}</span>
             <div className="flex gap-1">
               <Button type="button" variant="ghost" size="icon" disabled={i === 0} aria-label={`${part} omhoog`} onClick={() => set({ ...layers, identityOrder: move(order, i, i - 1) })}><ArrowUp className="size-4" /></Button>
               <Button type="button" variant="ghost" size="icon" disabled={i === order.length - 1} aria-label={`${part} omlaag`} onClick={() => set({ ...layers, identityOrder: move(order, i, i + 1) })}><ArrowDown className="size-4" /></Button>
@@ -162,10 +162,10 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
                   if (dragIdx !== null) set({ ...layers, sections: move(layers.sections, dragIdx, i) });
                   setDragIdx(null);
                 }}
-                className={cn("flex items-center gap-2 rounded-lg border border-border bg-background px-2 py-1.5 text-sm", !s.visible && "opacity-60")}
+                className={cn("grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border-b border-border py-2 text-sm", !s.visible && "opacity-60")}
               >
                 <GripVertical className="h-4 w-4 cursor-grab text-muted-foreground" aria-hidden />
-                <span className="flex-1">{SECTION_LABEL[s.id]}</span>
+                <span className="min-w-0 break-words">{SECTION_LABEL[s.id]}</span>
                 <RowTools
                   visible={s.visible}
                   onToggle={() => set({ ...layers, sections: layers.sections.map((x, j) => (j === i ? { ...x, visible: !x.visible } : x)) })}
@@ -198,11 +198,11 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
           </div>
           {layers.backgrounds.length === 0 && <p className="text-xs text-muted-foreground">Geen lagen — het thema bepaalt de achtergrond.</p>}
           {layers.backgrounds.map((b, i) => (
-            <div key={b.id} className="rounded-lg border border-border bg-background p-2">
+            <div key={b.id} className="border-b border-border py-3">
               <div className="flex items-center gap-2">
-                <button type="button" className="flex-1 text-left text-sm" onClick={() => setOpenBg(openBg === b.id ? null : b.id)}>
+                <Button type="button" variant="ghost" aria-expanded={openBg === b.id} className="min-w-0 flex-1 justify-start text-left text-sm" onClick={() => setOpenBg(openBg === b.id ? null : b.id)}>
                   {i + 1}. {{ color: "Kleur", gradient: "Verloop", pattern: "Patroon", photo: "Foto" }[b.kind]}
-                </button>
+                </Button>
                 <RowTools
                   visible={b.visible}
                   onToggle={() => setBg(i, { visible: !b.visible })}
@@ -274,7 +274,7 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
                 </SelectContent>
               </Select>
               {blockId && (
-                <div className="space-y-3 rounded-lg border border-border bg-background p-3">
+                <div className="space-y-3 border-t border-border pt-3">
                   <div className="grid grid-cols-2 gap-2">
                     <label className="space-y-1 text-xs">Breedte<Select value={String(blockStyle.width ?? 2)} onValueChange={v => setBlockStyle({ width: v === "1" ? 1 : 2 })}><SelectTrigger aria-label="Componentbreedte"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="1">Halve breedte</SelectItem><SelectItem value="2">Volle breedte</SelectItem></SelectContent></Select></label>
                     <label className="space-y-1 text-xs">Hoogte<Select value={blockStyle.height ?? "auto"} onValueChange={v => setBlockStyle({ height: v as BlockStyle["height"] })}><SelectTrigger aria-label="Componenthoogte"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="auto">Automatisch</SelectItem><SelectItem value="medium">Hoog</SelectItem><SelectItem value="tall">Extra hoog</SelectItem></SelectContent></Select></label>
@@ -330,11 +330,11 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
             </Button>
           </div>
           {layers.decorations.map((d, i) => (
-            <div key={d.id} className="rounded-lg border border-border bg-background p-2">
+            <div key={d.id} className="border-b border-border py-3">
               <div className="flex items-center gap-2">
-                <button type="button" className="flex-1 text-left text-sm" onClick={() => setOpenDec(openDec === d.id ? null : d.id)}>
+                <Button type="button" variant="ghost" aria-expanded={openDec === d.id} className="min-w-0 flex-1 justify-start text-left text-sm" onClick={() => setOpenDec(openDec === d.id ? null : d.id)}>
                   {d.kind === "emoji" ? d.emoji : { circle: "Cirkel", square: "Vierkant", star: "Ster", blob: "Vlek" }[d.kind]}
-                </button>
+                </Button>
                 <RowTools
                   visible={d.visible}
                   onToggle={() => setDec(i, { visible: !d.visible })}
@@ -387,10 +387,11 @@ export function LayerStudioAccordion({ value, onChange, blocks }: Props) {
 }
 
 function StickerPicker({ onPick }: { onPick: (emoji: string) => void }) {
-  const [cat, setCat] = useState(STICKER_CATEGORIES[0]!.id);
-  const current = STICKER_CATEGORIES.find((c) => c.id === cat) ?? STICKER_CATEGORIES[0]!;
+  const [cat, setCat] = useState(STICKER_CATEGORIES[0]?.id ?? "");
+  const current = STICKER_CATEGORIES.find((c) => c.id === cat) ?? STICKER_CATEGORIES[0];
+  if (!current) return null;
   return (
-    <div className="space-y-2 rounded-md border border-border p-2">
+    <div className="space-y-2 border-t border-border pt-3">
       <div className="flex flex-wrap gap-1">
         {STICKER_CATEGORIES.map((c) => (
           <Button key={c.id} type="button" size="sm" variant={c.id === cat ? "default" : "ghost"} className="h-7 px-2 text-xs" onClick={() => setCat(c.id)}>
@@ -398,11 +399,11 @@ function StickerPicker({ onPick }: { onPick: (emoji: string) => void }) {
           </Button>
         ))}
       </div>
-      <div className="grid grid-cols-8 gap-1">
+      <div className="grid grid-cols-6 gap-1 sm:grid-cols-8">
         {current.stickers.map((s) => (
-          <button key={s} type="button" className="rounded p-1 text-lg hover:bg-muted" onClick={() => onPick(s)} aria-label={`Sticker ${s}`}>
+          <Button key={s} type="button" variant="ghost" className="p-1 text-lg" onClick={() => onPick(s)} aria-label={`Sticker ${s}`}>
             {s}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

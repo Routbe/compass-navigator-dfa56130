@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { motion, useReducedMotion } from "motion/react";
-import { premiumSpringPreset } from "@/lib/spatial-motion";
+import { snappySpringPreset } from "@/lib/spatial-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -56,7 +56,7 @@ const TabsTrigger = React.forwardRef<
     onFocus={(e) => { context?.setHovered(props.value); onFocus?.(e); }}
     onBlur={(e) => { context?.setHovered(null); onBlur?.(e); }}
   >
-    {context && (context.hovered ? context.hovered === props.value : selected) && <motion.span aria-hidden className="spatial-indicator" layoutId={`tab-indicator-${context.id}`} transition={reduced ? { duration: 0 } : premiumSpringPreset} />}
+    {context && selected && <motion.span aria-hidden className="spatial-indicator" initial={false} layoutId={`tab-indicator-${context.id}`} transition={reduced ? { duration: 0 } : snappySpringPreset} />}
     {children}
   </TabsPrimitive.Trigger>
   );

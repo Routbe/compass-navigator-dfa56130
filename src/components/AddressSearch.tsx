@@ -145,7 +145,7 @@ export function AddressSearch({ onPick }: Props) {
   };
 
   return (
-    <div className="min-w-0 space-y-2 rounded-xl border border-border bg-muted/30 p-3">
+    <div className="min-w-0 space-y-2">
       <label className="input-label" htmlFor="address-search">
         Search an address or paste a Maps link{" "}
         <span className="font-normal text-muted-foreground">(optional)</span>

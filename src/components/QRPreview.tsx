@@ -1166,7 +1166,7 @@ export function QRPreview({
           mode) so the preview stays scannable and print-accurate. */}
       <div
         className={cn(
-          "w-full max-w-full overflow-hidden p-8 shadow-lg transition-all duration-300",
+          "w-full max-w-[320px] overflow-hidden p-3 sm:p-4 transition-colors duration-150",
           frameStyleClasses[frameStyle],
         )}
         style={{

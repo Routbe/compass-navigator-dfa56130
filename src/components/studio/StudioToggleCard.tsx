@@ -6,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
  * Componentkaart in de Studio: meteen aan/uit via de schakelaar, en met het
  * pijltje open je de volledige instellingen.
  */
-export function StudioToggleCard({ icon, title, subtitle, checked, onCheckedChange, children, id }: {
+export function StudioToggleCard({ icon, title, subtitle, checked, onCheckedChange, children, id, unframed = false }: {
   icon: ReactNode;
   title: string;
   subtitle?: string;
@@ -14,9 +14,10 @@ export function StudioToggleCard({ icon, title, subtitle, checked, onCheckedChan
   onCheckedChange: (v: boolean) => void;
   children: ReactNode;
   id?: string;
+  unframed?: boolean;
 }) {
   return (
-    <details id={id} className="acrylic-card group px-4 py-2 sm:px-5">
+    <details id={id} className={unframed ? "group border-b border-border py-2" : "acrylic-card group px-4 py-2 sm:px-5"}>
       <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 [&::-webkit-details-marker]:hidden">
         <span className="shrink-0">{icon}</span>
         <span className="min-w-0 flex-1 text-left">
