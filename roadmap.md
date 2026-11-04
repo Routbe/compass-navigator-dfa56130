@@ -1,13 +1,14 @@
 # ROUT repository import
 
 ## Studio usability
-- [ ] Connect Widgets folder and remove widgets from Links and components; add NL/EN/FR/DE labels.
-- [ ] Keep fallback Inbox, Pinboard and Badges below the profile block grid.
-- [ ] Prevent mobile studio label overlap in every supported language.
-- [ ] Remove indicator interaction lag and simplify link input and QR preview framing.
-- [ ] Float the shared documentation search bar within page gutters.
-- [ ] Make workspace switching tap-accessible with an inline list; restyle Layers studio.
-- [ ] Run focused tests and browser verification; report any authenticated-access blocker.
+- [x] Connect Widgets folder and remove nested widget controls from Links and components; add NL/EN/FR/DE labels.
+- [x] Keep fallback Inbox, Pinboard and Badges below the profile block grid.
+- [x] Preserve intrinsic label widths in scrolling tracks, including labels wider than a phone screen.
+- [x] Animate committed selections without hover interception; remove duplicate link-input cavity and reduce QR preview framing while retaining scan-safe contrast.
+- [x] Float shared documentation search within page gutters; checked at 320, 390 and 1280 px.
+- [x] Make profile-menu workspace switching tap-accessible with an inline list and swipe support; restyle Layers and account settings surfaces.
+- [x] Run 21 focused tests; browser-check public documentation and real QR rendering plus isolated tabs/Layers controls at mobile/desktop sizes without runtime errors.
+- [ ] Verify logged-in Widgets, saved profile ordering, account settings and workspace switching end-to-end: blocked by unavailable authenticated ROUT session (Studio remains at secure session check).
 
 ## Google Wallet upgrade
 - [x] Save the four requested Google Wallet settings securely.

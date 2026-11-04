@@ -305,7 +305,7 @@ export default function AccountSettings() {
       description={`Signed in as ${user.email}`}
       crumbs={[{ label: "Instellingen" }]}
     >
-      <Tabs value={tab} onValueChange={(v) => setTab(parseTab(v))} className="mt-4">
+      <Tabs value={tab} onValueChange={(v) => setTab(parseTab(v))} className="account-settings-surface mt-4">
         <TabsList data-sticky-tabs className="sticky top-20 z-30 flex h-auto w-full flex-nowrap justify-start gap-1 overflow-x-auto whitespace-nowrap rounded-lg p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <TabsTrigger className="h-9 shrink-0 px-3" value="profile">
             {t("settings.tabs.profile")}
