@@ -31,6 +31,7 @@ import { parseOmniInput, type OmniIntent } from "@/lib/omni-parser";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import { useTypingPlaceholder } from "@/hooks/useTypingPlaceholder";
+import { useEditorialMotion } from "@/hooks/useEditorialMotion";
 import { SovereignVisual } from "@/components/gateway/SovereignVisual";
 import everydayImage from "@/assets/rout-qr-everyday-refined.jpg";
 import { ProfileScene, QrScene, AnalyticsScene, SocialScene, WorkspaceScene, DeveloperScene } from "@/components/gateway/StoryVisuals";
@@ -100,6 +101,7 @@ export default function Gateway() {
   const { user, loading } = useAuth();
   const { t } = useI18n();
   const reduced = useReducedMotion();
+  const editorialRef = useEditorialMotion<HTMLDivElement>();
   const typing = useMemo(() => ["rout.be/u/jona", "rout.be/w/maximilien", ...TYPING_KEYS.map((k) => t(k))], [t]);
   const nav = useNavigate();
   const [value, setValue] = useState("");
@@ -119,20 +121,21 @@ export default function Gateway() {
 
   return (
     <AppLayout width="full" revealFooter tone="infrastructure">
+      <div ref={editorialRef} className="gateway-editorial">
       <section className="infra-hero">
         <SovereignVisual />
         <div className="infra-hero-content mx-auto flex max-w-6xl flex-col items-start px-6 py-8 sm:px-10 sm:py-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t("gateway.kicker")}</p>
-          <h1 className="infra-title mt-5 font-display text-6xl leading-[1.05] sm:text-7xl">
+          <p data-intro className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t("gateway.kicker")}</p>
+          <h1 data-intro className="infra-title mt-5 font-display text-6xl leading-[1.05] sm:text-7xl">
             ROUT
           </h1>
-          <p className="mt-3 max-w-xl font-display text-2xl leading-tight sm:text-3xl">{t("infra.lead.title")}</p>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
+          <p data-intro className="mt-3 max-w-xl font-display text-2xl leading-tight sm:text-3xl">{t("infra.lead.title")}</p>
+          <p data-intro className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
             {t("infra.lead.text")}
           </p>
 
           <form
-            className="omni-bar mt-7 w-full max-w-xl"
+            data-intro className="omni-bar mt-7 w-full max-w-xl"
             onSubmit={(e) => {
               e.preventDefault();
               submit();
@@ -188,7 +191,7 @@ export default function Gateway() {
             ))}
           </div>
 
-          <div className="mt-6 flex w-full max-w-xl flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div data-intro className="mt-6 flex w-full max-w-xl flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
             <motion.div whileTap={reduced ? undefined : { scale: 0.96 }} transition={premiumSpringPreset}><Button asChild size="lg" className="infra-action h-12 w-full gap-2 px-6 text-sm">
               <Link to="/auth">
                 <Fingerprint className="h-4 w-4" /> {t("gateway.claim")}
@@ -232,6 +235,7 @@ export default function Gateway() {
       <section className="story-section"><Reveal className="story-inner"><p className="story-small-label">{t("story.more.kicker")}</p><h2 className="story-heading mt-5">{t("story.more.title")}</h2><div className="story-more-grid mt-12">{MORE.map(({ key, to, Icon }) => <Link key={key} to={to} className="story-more-item"><Icon className="h-5 w-5 text-primary" /><h3 className="mt-6 font-display text-2xl">{t(`story.${key}.title`)}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(`story.${key}.text`)}</p><ArrowUpRight className="mt-6 h-4 w-4" /></Link>)}</div></Reveal></section>
 
       <section className="story-section story-final"><Reveal className="story-inner"><p className="story-small-label">ROUT / YOUR NEXT CHAPTER</p><h2 className="story-heading mt-6">{t("story.final.title")}</h2><p className="story-prose mt-6">{t("story.final.text")}</p><Button asChild size="lg" className="mt-8"><Link to="/auth"><Fingerprint />{t("gateway.claim")}<ArrowRight /></Link></Button><div className="mt-14 flex flex-wrap gap-8 text-xs text-muted-foreground">{PRINCIPLES.map(({ Icon, text }) => <span key={text} className="flex items-center gap-2"><Icon className="h-4 w-4" />{t(text)}</span>)}</div><div className="mt-12 flex flex-wrap gap-6 border-t border-border pt-8 text-sm"><Link to="/product">{t("gateway.link.platform")}</Link><Link to="/about">{t("gateway.link.about")}</Link><Link to="/developers">{t("gateway.link.developers")}</Link><Link to="/auth/sign-in">{t("gateway.link.signIn")}</Link></div></Reveal></section>
+      </div>
     </AppLayout>
   );
 }

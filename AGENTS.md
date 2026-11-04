@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Repository import
+- Homepage motion uses client-loaded Anime.js and original GLSL in the existing lazily loaded Three.js scene; About styling is scoped to docs-about. Why: keeps SSR text intact, avoids copied shader licensing, and preserves other page themes.
 - Studio widget controls belong to the standalone Widgets accordion; explicit blocks suppress legacy fallbacks, which render after the block grid. Why: avoids duplicate controls and widgets above the biography.
 - Choice tracks keep intrinsic nonshrinking labels and animate the committed selection, not hover. Why: localized mobile tabs remain legible and selections respond immediately.
 - Preserve the imported ROUT TanStack application, its existing public URLs, and its design; source imports must exclude Git metadata, environment secrets, dependencies, and generated route trees.

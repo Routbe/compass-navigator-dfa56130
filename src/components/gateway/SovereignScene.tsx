@@ -16,6 +16,16 @@ float noise(float x){float i=floor(x);float f=fract(x);return mix(h(vec2(i,1.)),
 void main(){
   vec2 uv=vUv;float aspect=resolution.x/resolution.y;
   vec3 col=vec3(0.);
+  // Original fluid-inspired interference ribbons, not a copied Shadertoy shader.
+  vec2 flow=uv;flow.x*=aspect;
+  float warp=sin(flow.x*2.4+time*.17)*.07+sin(flow.x*5.-time*.12)*.035;
+  float center=.24+warp+sin(flow.x*1.8+time*.08)*.055;
+  for(int ribbon=0;ribbon<7;ribbon++){
+    float r=float(ribbon);
+    float path=center+r*.009+sin(flow.x*3.2+time*.14+r*.3)*.012;
+    float line=exp(-abs(flow.y-path)*480.);
+    col+=mix(emerald,cyan,r/6.)*line*.26;
+  }
   for(int layer=0;layer<3;layer++){
     float L=float(layer);
     float cols=18.+L*10.;float rows=6.+L*3.;
@@ -112,7 +122,7 @@ function Globe({ colors, reduced, ready }: { colors: { ink: string; emerald: str
     const x = parseFloat(host?.style.getPropertyValue('--lg-x') || '50') / 100 - 0.5;
     group.current.rotation.z += (-x * 0.06 - group.current.rotation.z) * (1 - Math.exp(-3 * d));
   });
-  return <group position={[0, -4.1, 0]} rotation={[0.55, 0, 0]}>
+  return <group position={[0, -3.6, 0]} rotation={[0.55, 0, 0]}>
     <group ref={group} rotation={[0, -0.25, 0]}>
       <points><bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[buffers.pos, 3]} />
