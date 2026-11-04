@@ -110,6 +110,7 @@ export function ProfileWidgetsAccordion({
             />
           )}
           <GuestbookAccordion
+            unframed
             enabled={prefs.guestbookEnabled}
             onEnabledChange={(v) => {
               onPref("guestbookEnabled", v);

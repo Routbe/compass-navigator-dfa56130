@@ -1847,6 +1847,7 @@ html[data-liquid] [style*="--lg-filter"] { backdrop-filter: var(--lg-filter) !im
 .spatial-dialog, .spatial-sheet { min-width: 0; }
 .spatial-dialog > *, .spatial-sheet > * { min-width: 0; }
 .spatial-dialog button, .spatial-sheet button { max-width: 100%; }
+.spatial-dialog .spatial-track .spatial-tab, .spatial-sheet .spatial-track .spatial-tab { max-width: none; }
 @media (min-width: 640px) and (max-height: 700px) {
   .infra-hero { min-height: 500px; }
   .infra-hero-content { min-height: 390px; padding-block: 18px 75px; }

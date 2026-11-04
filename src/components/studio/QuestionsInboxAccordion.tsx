@@ -42,6 +42,7 @@ export function QuestionsInboxAccordion({ space, handle, displayName, avatarUrl,
   return (
     <>
     <StudioToggleCard
+      unframed
       id="studio-qa"
       icon={<StudioSectionIcon kind="questions" />}
       title={t("pages.qa.inbox.title")}

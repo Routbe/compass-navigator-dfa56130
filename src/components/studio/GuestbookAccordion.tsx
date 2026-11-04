@@ -11,7 +11,7 @@ import { StudioToggleCard } from "./StudioToggleCard";
 import { Button } from "@/components/ui/button";
 
 /** Studio: all received notes; pin the best ones to the public Prikbord. */
-export function GuestbookAccordion({ enabled, onEnabledChange }: { enabled: boolean; onEnabledChange: (enabled: boolean) => void }) {
+export function GuestbookAccordion({ enabled, onEnabledChange, unframed = false }: { enabled: boolean; onEnabledChange: (enabled: boolean) => void; unframed?: boolean }) {
   const { t } = useTranslation();
   const qc = useQueryClient();
   const fetchMine = useServerFn(getMyGuestbook);
@@ -24,6 +24,7 @@ export function GuestbookAccordion({ enabled, onEnabledChange }: { enabled: bool
 
   return (
     <StudioToggleCard
+      unframed={unframed}
       icon={<StudioSectionIcon kind="guestbook" />}
       title={t("studio.guestbook.title")}
       subtitle={t("studio.guestbook.counts", { total: notes.length, pinned: pinnedCount, limit: GUESTBOOK_PIN_LIMIT })}

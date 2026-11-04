@@ -450,12 +450,7 @@ const Index = () => {
         {/* Center column — the QR preview card stays centred inside its own cell */}
         <main className="flex min-w-0 flex-col items-center px-4 pb-8 pt-4 sm:px-6 lg:h-full lg:overflow-y-auto lg:pt-6 [scrollbar-width:thin]">
           <div
-            className="preview-sheet sketch-frame mx-auto w-full max-w-md rounded-3xl border border-border p-4 sm:p-6"
-
-            style={{
-              boxShadow:
-                "0 14px 8px 0 rgba(64, 64, 64, 0.04), 0 6px 6px 0 rgba(64, 64, 64, 0.07), 0 2px 3px 0 rgba(64, 64, 64, 0.08)",
-            }}
+            className="preview-sheet mx-auto w-full max-w-sm py-2"
           >
             <div className="flex items-baseline justify-between mb-4">
               <h2 className="font-display text-[26px] leading-none text-foreground sketch-underline">
