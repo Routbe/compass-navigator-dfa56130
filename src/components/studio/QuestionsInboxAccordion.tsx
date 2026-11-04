@@ -27,7 +27,7 @@ export function QuestionsInboxAccordion({ space, handle, displayName, avatarUrl,
   displayName: string | null;
   avatarUrl: string | null;
   prefs: QaPrefs;
-  onPref: <K extends keyof QaPrefs>(key: K, value: QaPrefs[K]) => void;
+  onPref: <K extends keyof QaPrefs>(key: K, value: ProfileDisplayPrefs[K]) => void;
 }) {
   const { t } = useI18n();
   const [shareOpen, setShareOpen] = useState(false);

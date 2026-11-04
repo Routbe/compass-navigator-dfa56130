@@ -85,7 +85,7 @@ export function ProfileWidgetsAccordion({
       <AccordionTrigger className="hover:no-underline">
         <span className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 pr-2">
           <span className="flex min-w-0 items-center gap-2 text-base font-medium">
-            <StudioSectionIcon kind="widgets" />{t("studio.widgets.title")}
+            <StudioSectionIcon kind="content" />{t("studio.widgets.title")}
           </span>
           <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
             {t("studio.widgets.visible", { count: active })}
