@@ -164,5 +164,9 @@
   "pages.qa.inbox.when.yesterday": "Yesterday",
   "pages.qa.inbox.when.yesterdayEvening": "Yesterday evening",
   "pages.qa.inbox.when.fewDays": "A few days ago",
-  "pages.qa.inbox.when.fewWeeks": "A few weeks ago"
+  "pages.qa.inbox.when.fewWeeks": "A few weeks ago",
+  "pages.qa.share.instagram": "Instagram story",
+  "pages.qa.share.igCopied": "Link copied. In Instagram tap the sticker button → Link and paste it.",
+  "pages.qa.share.igSteps": "Instagram: choose your story, tap the sticker button → Link and paste. Followers can then tap it.",
+  "pages.qa.share.snapSteps": "Snapchat: the link is already attached to your snap. Viewers swipe up or tap to send you a question."
 }

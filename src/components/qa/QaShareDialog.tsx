@@ -73,6 +73,16 @@ export function QaShareDialog({ open, onOpenChange, target, handle, space, displ
       toast.error(t("pages.qa.share.failed"));
     }
   };
+  /** Instagram has no web API for link stickers: copy the link first, then open the share sheet (as NGL does). */
+  const shareInstagram = () => {
+    void navigator.clipboard?.writeText(link).then(() => toast.success(t("pages.qa.share.igCopied"))).catch(() => undefined);
+    if (file && supportsStoryShare(file)) void shareStoryFile(file).catch(() => toast.error(t("pages.qa.share.failed")));
+    else download();
+  };
+  /** Snapchat Creative Kit: opens the camera with the ask link attached, so the snap is tappable. */
+  const shareSnapchat = () => {
+    window.open(`https://www.snapchat.com/scan?attachmentUrl=${encodeURIComponent(link)}`, "_blank", "noopener");
+  };
   const save = (href: string, name: string) => {
     const a = document.createElement("a");
     a.href = href; a.download = name; a.rel = "noopener";
@@ -119,10 +129,18 @@ export function QaShareDialog({ open, onOpenChange, target, handle, space, displ
         </div>
         <div className="grid gap-2">
           {video&&<Button variant="outline" onClick={()=>{if(supportsStoryShare(video))void shareStoryFile(video).catch(()=>toast.error(t("pages.qa.share.failed")));else {const href=URL.createObjectURL(video);save(href,video.name);setTimeout(()=>URL.revokeObjectURL(href),1000);}}}><Share2 className="h-4 w-4"/>{t(supportsStoryShare(video)?"presence.share":"presence.download")}</Button>}
+          <div className="grid grid-cols-2 gap-2">
+            <Button onClick={shareInstagram} disabled={!url} className="gap-2"><Share2 className="h-4 w-4" aria-hidden />{t("pages.qa.share.instagram")}</Button>
+            <Button variant="outline" onClick={shareSnapchat} className="gap-2"><Share2 className="h-4 w-4" aria-hidden />{t("pages.qa.share.snapchat")}</Button>
+          </div>
+          <ul className="space-y-1 text-xs text-muted-foreground">
+            <li>{t("pages.qa.share.igSteps")}</li>
+            <li>{t("pages.qa.share.snapSteps")}</li>
+          </ul>
           {canShareFile && (
-            <Button onClick={() => void share()} className="gap-2"><Share2 className="h-4 w-4" aria-hidden />{t("pages.qa.share.share")}</Button>
+            <Button variant="outline" onClick={() => void share()} className="gap-2"><Share2 className="h-4 w-4" aria-hidden />{t("pages.qa.share.share")}</Button>
           )}
-          <Button variant={canShareFile ? "outline" : "default"} onClick={download} disabled={!url} className="gap-2">
+          <Button variant="outline" onClick={download} disabled={!url} className="gap-2">
             <Download className="h-4 w-4" aria-hidden />{t("pages.qa.share.download")}
           </Button>
           <div className="grid gap-2">

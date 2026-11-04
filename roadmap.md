@@ -42,3 +42,4 @@
 - [ ] Tours: add new tours where useful.
 - [ ] Re-read everything after the above and continue on remaining weak spots.
 - [x] Favicon/app icons: bunny logo, transparent outside, all sizes.
+- [x] Share anonymous-question story to Instagram (link copied for link sticker) and Snapchat (tappable attached link + sticker).

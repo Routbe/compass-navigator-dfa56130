@@ -164,5 +164,9 @@
   "pages.qa.inbox.when.yesterday": "Gestern",
   "pages.qa.inbox.when.yesterdayEvening": "Gestern Abend",
   "pages.qa.inbox.when.fewDays": "Vor ein paar Tagen",
-  "pages.qa.inbox.when.fewWeeks": "Vor ein paar Wochen"
+  "pages.qa.inbox.when.fewWeeks": "Vor ein paar Wochen",
+  "pages.qa.share.instagram": "Instagram-Story",
+  "pages.qa.share.igCopied": "Link kopiert. Tippe in Instagram auf den Sticker-Button → Link und füge ihn ein.",
+  "pages.qa.share.igSteps": "Instagram: Story wählen, auf den Sticker-Button → Link tippen und einfügen. So können Follower darauf tippen.",
+  "pages.qa.share.snapSteps": "Snapchat: Der Link hängt schon an deinem Snap. Zuschauer wischen hoch oder tippen, um dir eine Frage zu senden."
 }
