@@ -1,0 +1,38 @@
+[
+  {
+    "layout": "desktop",
+    "control": "Explore the OS",
+    "status": "passed",
+    "url": "http://localhost:8080/"
+  },
+  {
+    "layout": "desktop",
+    "control": "Platform menu",
+    "status": "passed",
+    "contents": "Close\nPlatform\n\nTOOLS\n\nQR generator\nFast standalone studio\nProfile studio\nSovereign link-in-bio & micro-site builder\nCalendar and bookings\nLinked and sovereign booking pages\nBatch generator\nBulk QR generation\nDynamic links and analytics\nTrackable short links\n\nINFRASTRUCTURE\n\nCustom domains\nDNS & CNAME configuration\nDeveloper console\nManage apps, API keys & infrastructure\nOpen source and documentation\nAGPLv3 & protocol\nNL\nEN\nFR\nDE"
+  },
+  {
+    "layout": "desktop",
+    "control": "Claim your identity",
+    "status": "destination inspected; account creation blocked by missing services",
+    "href": "/auth"
+  },
+  {
+    "layout": "phone",
+    "control": "Explore the OS",
+    "status": "passed",
+    "url": "http://localhost:8080/"
+  },
+  {
+    "layout": "phone",
+    "control": "Platform menu",
+    "status": "passed",
+    "contents": "Close\nPlatform\n\nTOOLS\n\nQR generator\nFast standalone studio\nProfile studio\nSovereign link-in-bio & micro-site builder\nCalendar and bookings\nLinked and sovereign booking pages\nBatch generator\nBulk QR generation\nDynamic links and analytics\nTrackable short links\n\nINFRASTRUCTURE\n\nCustom domains\nDNS & CNAME configuration\nDeveloper console\nManage apps, API keys & infrastructure\nOpen source and documentation\nAGPLv3 & protocol\nNL\nEN\nFR\nDE"
+  },
+  {
+    "layout": "phone",
+    "control": "Claim your identity",
+    "status": "destination inspected; account creation blocked by missing services",
+    "href": "/auth"
+  }
+]

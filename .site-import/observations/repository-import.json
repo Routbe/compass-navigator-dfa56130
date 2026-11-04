@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/Routbe/compass-navigator-991e2728.git",
+  "commit": "7f666cf",
+  "kind": "source-repository",
+  "permissionConfirmed": true,
+  "credentialsCopied": false,
+  "databaseMigrationsApplied": false,
+  "sourceWebsiteComparison": "Not applicable: application repository imported, not GitHub's website UI.",
+  "checks": {
+    "build": "OK",
+    "tests": "23 passed across six navigation, docs, address, and route suites",
+    "desktopAndPhone": "Public homepage scrolls to bottom; platform menu opens with tools and infrastructure links and closes with Escape.",
+    "metadata": "Content routes include local heads; index uses socialMeta and documentation uses docHead.",
+    "accountsAndData": "Blocked: original account/database/service credentials unavailable; /auth destination was inspected but navigation/account creation not verified.",
+    "media": "Existing repository assets and visual components retained; no replacement/static fallback introduced. Detailed section-by-section motion parity was not verified.",
+    "remainingVerification": "Detailed section-by-section media/motion, menu settled-state text clipping, and account navigation remain unverified."
+  }
+}
