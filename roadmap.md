@@ -1,5 +1,14 @@
 # ROUT repository import
 
+## Studio usability
+- [ ] Connect Widgets folder and remove widgets from Links and components; add NL/EN/FR/DE labels.
+- [ ] Keep fallback Inbox, Pinboard and Badges below the profile block grid.
+- [ ] Prevent mobile studio label overlap in every supported language.
+- [ ] Remove indicator interaction lag and simplify link input and QR preview framing.
+- [ ] Float the shared documentation search bar within page gutters.
+- [ ] Make workspace switching tap-accessible with an inline list; restyle Layers studio.
+- [ ] Run focused tests and browser verification; report any authenticated-access blocker.
+
 ## Google Wallet upgrade
 - [x] Save the four requested Google Wallet settings securely.
 - [x] Upgrade Google card background, safe-area logo, artwork and front-face fields; preserve owner-only issuance.
