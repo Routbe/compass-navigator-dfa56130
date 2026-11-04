@@ -26,7 +26,7 @@ import { mastodonAvatarSrc } from "@/lib/mastodon-avatar";
 import { profileImageSrc } from "@/lib/image-proxy-rules";
 import { useScope, useWorkspaceContext } from "@/components/WorkspaceSwitcher";
 import { WorkspaceIcon } from "@/components/workspace/WorkspaceIcon";
-import { Shield, ArrowLeft, ArrowLeftRight, Check as CheckIcon, Plus as PlusIcon, User as UserIcon } from "lucide-react";
+import { Shield, CreditCard, ArrowLeft, ArrowLeftRight, Check as CheckIcon, Plus as PlusIcon, User as UserIcon } from "lucide-react";
 import { canUseDeveloperTools } from "@/lib/workspace-rules";
 import { getMyAccount } from "@/lib/account.functions";
 import { contextBadge, contextLinks, GLOBAL_ACCOUNT_LINK } from "@/lib/context-menu";
@@ -155,7 +155,8 @@ export function ProfileMenu() {
           onTouchStart={(event) => { const touch = event.touches[0]; if (touch) touchStart.current = { x: touch.clientX, y: touch.clientY }; }}
           onTouchEnd={(event) => { const touch = event.changedTouches[0]; const start = touchStart.current; touchStart.current = null; if (!touch || !start) return; const dx = touch.clientX - start.x; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(touch.clientY - start.y) * 1.5) setWorkspaceView(dx < 0); }}>
           <motion.div key={workspaceView ? "workspaces" : "account"} initial={reducedMotion ? false : { x: workspaceView ? 24 : -24, opacity: 0.7 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: reducedMotion ? 0 : 0.18 }}>
-          <div className="px-2 py-2">
+          <div className="flex items-center gap-2 px-2 py-2">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <p className="truncate text-sm font-medium">{displayName}</p>
               <span
@@ -168,6 +169,16 @@ export function ProfileMenu() {
               </span>
             </div>
             <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+          </div>
+            <Link
+              to="/wallet"
+              onClick={() => setMenuOpen(false)}
+              aria-label={trI18n.t("walletPage.openMenu")}
+              title={trI18n.t("walletPage.openMenu")}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <CreditCard className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
           <DropdownMenuItem className="min-h-11 gap-2" disabled={scopeApi.busy} aria-label={workspaceView ? trI18n.t("menu.backToAccount") : trI18n.t("workspace.switch")} onSelect={(event) => { event.preventDefault(); setWorkspaceView(!workspaceView); }}>
               {workspaceView && <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />}

@@ -54,6 +54,8 @@ import { DASHBOARD_WIDGETS, OPTIONAL_DASHBOARD_WIDGETS, normalizeDashboardLayout
 import { DashboardMusic, DashboardWeather, DashboardVisitors, UpcomingDashboardWidget } from "./ExternalDashboardWidgets";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { i18n as trI18n } from "@/lib/i18n";
+import { ShareWidget, CardWidget } from "./ShareCardWidgets";
+import { useMyHandle } from "@/hooks/useMyHandle";
 
 const KIND_ICON: Record<ChronosKind, typeof Inbox> = {
   notification: Inbox,
@@ -451,6 +453,8 @@ function LivePresenceWidget({ userId }: { userId: string }) {
 
 type WidgetId = DashboardWidgetId;
 const WIDGET_LABEL: Record<WidgetId, string> = {
+  share: "Delen",
+  card: "ROUT-kaart",
   presence: "Live Presence",
   relays: "Identity Relays",
   hub: "Profiel Hub",
@@ -531,6 +535,7 @@ export function CommandCenter() {
   const state = useLocalFirst<CommandCenterData>(user ? `cockpit:${user.id}` : null, () => loadCenter());
   const [isEditingDashboard, setIsEditingDashboard] = useState(false);
   const layout = useDashboardLayout(user?.id);
+  const myHandle = useMyHandle();
 
   if (!user || (!state.data && state.syncing)) {
     return (
@@ -600,6 +605,13 @@ export function CommandCenter() {
               <RelayWidget userId={user.id} connectedApps={c?.connectedApps ?? null} />
             </Slot>
           ) : null}
+
+          <Slot id="share" className="sm:col-span-2" {...slot("share")}>
+            <ShareWidget handle={myHandle} />
+          </Slot>
+          <Slot id="card" {...slot("card")}>
+            <CardWidget handle={myHandle} />
+          </Slot>
 
           <Slot id="presence" className="sm:col-span-2" {...slot("presence")}>
             <LivePresenceWidget userId={user.id} />

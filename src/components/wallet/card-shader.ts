@@ -142,7 +142,8 @@ void main() {
   vec3 mask = texture2D(uMask, vUv).rgb * (1.0 - uBack);
   // Never print optical layers over QR quiet zones, portraits or MRZ.
   float frontReserved = max(boxMask(vUv, uQrBox.xy, uQrBox.zw),
-    (1.0 - smoothstep(0.235, 0.25, length((vUv - vec2(0.5, 0.58)) * vec2(1.0, 1.588)))) * texture2D(uPortrait, vUv).r);
+    1.0 - smoothstep(0.235, 0.25, length((vUv - vec2(0.5, 0.58)) * vec2(1.0, 1.588))));
+  // The whole avatar disc stays smooth, also where a transparent avatar has no pixels.
   float backReserved = max(boxMask(vUv, uQrBox.xy, uQrBox.zw),
     1.0 - smoothstep(0.148, 0.16, vUv.y));
   float printable = 1.0 - mix(frontReserved, backReserved, uBack);
