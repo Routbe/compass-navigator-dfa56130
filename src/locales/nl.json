@@ -1758,5 +1758,8 @@
   "card.finish.glass": "Glas",
   "card.finish.holo": "Holo",
   "card.open": "Open kaart",
-  "card.studioHelp": "3D-visitekaartje, Google Wallet, Apple Wallet en contactbestand."
+  "card.studioHelp": "3D-visitekaartje, Google Wallet, Apple Wallet en contactbestand.",
+  "menu.checkingSession": "Je sessie wordt gecontroleerd",
+  "menu.account": "Accountmenu",
+  "menu.backToAccount": "Terug naar accountmenu"
 }

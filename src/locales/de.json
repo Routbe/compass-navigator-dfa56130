@@ -1758,5 +1758,8 @@
   "card.finish.glass": "Glas",
   "card.finish.holo": "Holo",
   "card.open": "Karte öffnen",
-  "card.studioHelp": "3D-Visitenkarte, Google Wallet, Apple Wallet und Kontaktdatei."
+  "card.studioHelp": "3D-Visitenkarte, Google Wallet, Apple Wallet und Kontaktdatei.",
+  "menu.checkingSession": "Sitzung wird geprüft",
+  "menu.account": "Kontomenü",
+  "menu.backToAccount": "Zurück zum Kontomenü"
 }

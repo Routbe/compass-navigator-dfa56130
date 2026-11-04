@@ -98,7 +98,7 @@ export function ProfileMenu() {
     return (
       <div
         role="status"
-        aria-label="Checking your session"
+        aria-label={trI18n.t("menu.checkingSession")}
         aria-busy="true"
         className="flex h-9 items-center gap-2 rounded-xl border border-border pl-1 pr-2"
       >
@@ -137,7 +137,7 @@ export function ProfileMenu() {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost"
             type="button"
-            aria-label="Account menu"
+            aria-label={trI18n.t("menu.account")}
             title={displayName}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full p-0"
           >
@@ -169,20 +169,20 @@ export function ProfileMenu() {
             </div>
             <p className="truncate text-xs text-muted-foreground">{user.email}</p>
           </div>
-          <DropdownMenuItem className="min-h-11 gap-2" disabled={scopeApi.busy} aria-label={workspaceView ? "Terug naar accountmenu" : "Wissel van account of workspace"} onSelect={(event) => { event.preventDefault(); setWorkspaceView(!workspaceView); }}>
+          <DropdownMenuItem className="min-h-11 gap-2" disabled={scopeApi.busy} aria-label={workspaceView ? trI18n.t("menu.backToAccount") : trI18n.t("workspace.switch")} onSelect={(event) => { event.preventDefault(); setWorkspaceView(!workspaceView); }}>
               {workspaceView && <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />}
               {scopeApi.active ? <WorkspaceIcon avatarUrl={scopeApi.active.avatarUrl} icon={scopeApi.active.icon} category={scopeApi.active.category} /> : <UserIcon className="h-4 w-4 shrink-0" aria-hidden />}
-              <span className="min-w-0 flex-1 truncate">{scopeApi.active ? scopeApi.active.name : "Persoonlijk"}</span>
+              <span className="min-w-0 flex-1 truncate">{scopeApi.active ? scopeApi.active.name : trI18n.t("workspace.personal")}</span>
               <ArrowLeftRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden />
           </DropdownMenuItem>
           {workspaceView ? <>
               <DropdownMenuSeparator />
-              <DropdownMenuItem disabled={scopeApi.busy} onClick={() => scopeApi.switchTo(null)} className="min-h-11 gap-2">
-                <UserIcon className="h-4 w-4" aria-hidden /> Persoonlijk
+              <DropdownMenuItem disabled={scopeApi.busy} onSelect={() => void scopeApi.switchTo(null)} className="min-h-11 gap-2">
+                <UserIcon className="h-4 w-4" aria-hidden /> {trI18n.t("workspace.personal")}
                 {!scopeApi.active && <CheckIcon className="ml-auto h-4 w-4" aria-hidden />}
               </DropdownMenuItem>
               {scopeApi.workspaces.map((w) => (
-                <DropdownMenuItem key={w.id} disabled={scopeApi.busy} onClick={() => scopeApi.switchTo(w.id)} className="min-h-11 gap-2">
+                <DropdownMenuItem key={w.id} disabled={scopeApi.busy} onSelect={() => void scopeApi.switchTo(w.id)} className="min-h-11 gap-2">
                   <WorkspaceIcon avatarUrl={w.avatarUrl} icon={w.icon} category={w.category} />
                   <span className="min-w-0 flex-1 truncate">{w.name}</span>
                   {w.id === scopeApi.active?.id && <CheckIcon className="ml-auto h-4 w-4" aria-hidden />}
@@ -190,7 +190,7 @@ export function ProfileMenu() {
               ))}
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={scopeApi.newWorkspace} className="gap-2">
-                <PlusIcon className="h-4 w-4" aria-hidden /> Nieuwe workspace
+                <PlusIcon className="h-4 w-4" aria-hidden /> {trI18n.t("workspace.new")}
               </DropdownMenuItem>
           </> : <>
           <DropdownMenuSeparator />

@@ -1758,5 +1758,8 @@
   "card.finish.glass": "Glass",
   "card.finish.holo": "Holo",
   "card.open": "Open card",
-  "card.studioHelp": "3D business card, Google Wallet, Apple Wallet and contact file."
+  "card.studioHelp": "3D business card, Google Wallet, Apple Wallet and contact file.",
+  "menu.checkingSession": "Checking your session",
+  "menu.account": "Account menu",
+  "menu.backToAccount": "Back to account menu"
 }
