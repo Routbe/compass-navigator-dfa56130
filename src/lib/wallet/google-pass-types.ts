@@ -1,6 +1,4 @@
-import type { createLocalizedString } from "./wallet-i18n";
-
-type LocalizedString = ReturnType<typeof createLocalizedString>;
+type LocalizedString = { defaultValue: { language: string; value: string }; translatedValues: { language: string; value: string }[] };
 export type GoogleImage = { sourceUri: { uri: string }; contentDescription: LocalizedString };
 export type GoogleTextModule = { id: string; body?: string; localizedHeader: LocalizedString; localizedBody?: LocalizedString };
 export type GoogleGenericObject = {
