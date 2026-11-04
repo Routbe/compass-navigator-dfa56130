@@ -401,6 +401,7 @@ import { Route as AuthenticatedStudioWWorkspaceSlugStudioRouteImport } from './r
 import { Route as ApiPublicBookingsIdActionRouteImport } from './routes/api_.public.bookings.$id.$action'
 import { Route as ApiPublicIntegrationsMastodonAvatarRouteImport } from './routes/api_.public.integrations.mastodon.avatar'
 import { Route as ApiWalletRenderCardIdHeroDotpngRouteImport } from './routes/api_.wallet.render.$cardId.hero[.]png'
+import { Route as ApiWalletRenderCardIdVersionFileRouteImport } from './routes/api_.wallet.render.$cardId.$version.$file'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -2474,6 +2475,12 @@ const ApiWalletRenderCardIdHeroDotpngRoute =
     path: '/api/wallet/render/$cardId/hero.png',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiWalletRenderCardIdVersionFileRoute =
+  ApiWalletRenderCardIdVersionFileRouteImport.update({
+    id: '/api_/wallet/render/$cardId/$version/$file',
+    path: '/api/wallet/render/$cardId/$version/$file',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -2867,6 +2874,7 @@ export interface FileRoutesByFullPath {
   '/api/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/console/apps/$appId/': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -3243,6 +3251,7 @@ export interface FileRoutesByTo {
   '/api/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/console/apps/$appId': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -3638,6 +3647,7 @@ export interface FileRoutesById {
   '/api_/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api_/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/_authenticated/console/apps/$appId/': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api_/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -4033,6 +4043,7 @@ export interface FileRouteTypes {
     | '/api/public/integrations/mastodon/avatar'
     | '/api/wallet/render/$cardId/hero.png'
     | '/console/apps/$appId/'
+    | '/api/wallet/render/$cardId/$version/$file'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -4409,6 +4420,7 @@ export interface FileRouteTypes {
     | '/api/public/integrations/mastodon/avatar'
     | '/api/wallet/render/$cardId/hero.png'
     | '/console/apps/$appId'
+    | '/api/wallet/render/$cardId/$version/$file'
   id:
     | '__root__'
     | '/'
@@ -4803,6 +4815,7 @@ export interface FileRouteTypes {
     | '/api_/public/integrations/mastodon/avatar'
     | '/api_/wallet/render/$cardId/hero.png'
     | '/_authenticated/console/apps/$appId/'
+    | '/api_/wallet/render/$cardId/$version/$file'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -5015,6 +5028,7 @@ export interface RootRouteChildren {
   ApiWalletRenderHeroDotpngRoute: typeof ApiWalletRenderHeroDotpngRoute
   ApiPublicBookingsIdActionRoute: typeof ApiPublicBookingsIdActionRoute
   ApiWalletRenderCardIdHeroDotpngRoute: typeof ApiWalletRenderCardIdHeroDotpngRoute
+  ApiWalletRenderCardIdVersionFileRoute: typeof ApiWalletRenderCardIdVersionFileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -7763,6 +7777,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWalletRenderCardIdHeroDotpngRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api_/wallet/render/$cardId/$version/$file': {
+      id: '/api_/wallet/render/$cardId/$version/$file'
+      path: '/api/wallet/render/$cardId/$version/$file'
+      fullPath: '/api/wallet/render/$cardId/$version/$file'
+      preLoaderRoute: typeof ApiWalletRenderCardIdVersionFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -8567,6 +8588,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiWalletRenderHeroDotpngRoute: ApiWalletRenderHeroDotpngRoute,
   ApiPublicBookingsIdActionRoute: ApiPublicBookingsIdActionRoute,
   ApiWalletRenderCardIdHeroDotpngRoute: ApiWalletRenderCardIdHeroDotpngRoute,
+  ApiWalletRenderCardIdVersionFileRoute: ApiWalletRenderCardIdVersionFileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

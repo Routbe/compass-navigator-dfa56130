@@ -1,7 +1,7 @@
 # ROUT repository import
 
 ## Google Wallet upgrade
-- [ ] Save the four requested Google Wallet settings securely.
+- [x] Save the four requested Google Wallet settings securely.
 - [ ] Upgrade Google card background, safe-area logo, artwork and front-face fields; preserve owner-only issuance.
 - [ ] Test payload, artwork, signing and access boundaries.
 - [ ] Verify real-user Wallet issuance or name missing credentials/session/provider blockers.
