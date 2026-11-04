@@ -770,5 +770,6 @@
   "studio.signup.brevoList": "Brevo-Listennummer (optional, nur bestätigte Anmeldungen)",
   "studio.signup.exported": "{{count}} Adressen heruntergeladen.",
   "studio.signup.exportFailed": "Download fehlgeschlagen. Bitte später erneut versuchen.",
-  "studio.signup.exportLimited": "Zu viele Downloads in dieser Stunde. Bitte später erneut versuchen."
+  "studio.signup.exportLimited": "Zu viele Downloads in dieser Stunde. Bitte später erneut versuchen.",
+  "studio.theme.hoverHint": "Bewege Maus oder Finger über die Buttons"
 }

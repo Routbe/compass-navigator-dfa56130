@@ -770,5 +770,6 @@
   "studio.signup.brevoList": "Brevo-lijstnummer (optioneel, alleen voor bevestigde inschrijvingen)",
   "studio.signup.exported": "{{count}} adressen gedownload.",
   "studio.signup.exportFailed": "Downloaden lukte niet. Probeer het later opnieuw.",
-  "studio.signup.exportLimited": "Te veel downloads dit uur. Probeer het later opnieuw."
+  "studio.signup.exportLimited": "Te veel downloads dit uur. Probeer het later opnieuw.",
+  "studio.theme.hoverHint": "Beweeg je muis of vinger over de knoppen"
 }
