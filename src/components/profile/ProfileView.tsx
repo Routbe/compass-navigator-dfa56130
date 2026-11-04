@@ -588,8 +588,6 @@ export function ProfileView({
         {profile.username && <TipJarButton handle={profile.username} theme={t} />}
         <ProfilePassport handle={profile.username} theme={t} />
         {profile.username && <ConnectedApps handle={profile.username} />}
-        {profile.username && prefs.guestbookEnabled && usesSectionFallback(profile.blocks, "widget:guestbook") && <ProfileGuestbook handle={profile.username} theme={t} />}
-        {profile.username && qaSpace && prefs.questionsEnabled && prefs.qaOnHub && usesSectionFallback(profile.blocks, "widget:questions") && <ProfileQuestions handle={profile.username} space={qaSpace} theme={t} prefs={prefs} preview={preview} />}
         {profile.username && !profile.blocks.some(b => b.kind === "event_list") && <ProfileEventList handle={profile.username} space={free ? "alias" : "root"} style={styleFor("event_list")} />}
         {profile.username && !profile.blocks.some(b => b.kind === "feedback") && <ProfileFeedback handle={profile.username} space={free ? "alias" : "root"} style={styleFor("feedback")} />}
 
@@ -692,7 +690,6 @@ export function ProfileView({
           </button>
         )}
 
-        {usesSectionFallback(profile.blocks, "widget:badges") && prefs.badgeShowcaseVisible && <BadgeShowcase userId={profile.id} theme={t} />}
 
         {prefs.timelineVisible && <ProfileTimeline userId={profile.id} theme={t} />}
 
@@ -876,6 +873,10 @@ export function ProfileView({
             ),
           ))}
         </div>
+
+        {profile.username && prefs.guestbookEnabled && usesSectionFallback(profile.blocks, "widget:guestbook") && <ProfileGuestbook handle={profile.username} theme={t} />}
+        {profile.username && qaSpace && prefs.questionsEnabled && prefs.qaOnHub && usesSectionFallback(profile.blocks, "widget:questions") && <ProfileQuestions handle={profile.username} space={qaSpace} theme={t} prefs={prefs} preview={preview} />}
+        {usesSectionFallback(profile.blocks, "widget:badges") && prefs.badgeShowcaseVisible && <BadgeShowcase userId={profile.id} theme={t} />}
 
         {prefs.socialPosition === "bottom" && socialRow}
         </div>

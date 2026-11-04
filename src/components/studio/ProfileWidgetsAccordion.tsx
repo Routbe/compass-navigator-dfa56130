@@ -83,7 +83,7 @@ export function ProfileWidgetsAccordion({
   return (
     <AccordionItem value="widgets" className="acrylic-card px-4 sm:px-5">
       <AccordionTrigger className="hover:no-underline">
-        <span className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 pr-2">
+        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 pr-2">
           <span className="flex min-w-0 items-center gap-2 text-base font-medium">
             <StudioSectionIcon kind="content" />{t("studio.widgets.title")}
           </span>
@@ -93,7 +93,6 @@ export function ProfileWidgetsAccordion({
         </span>
       </AccordionTrigger>
       <AccordionContent className="space-y-4 pb-5">
-        <p className="text-sm text-muted-foreground">{t("studio.widgets.help")}</p>
 
         {/* Vaste widgets: altijd zichtbaar, direct aan/uit — nooit achter een modal. */}
         <div className="space-y-3">

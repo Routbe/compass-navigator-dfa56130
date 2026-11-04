@@ -6,8 +6,7 @@ import { FediverseProfileField } from "@/components/dashboard/FediverseProfileFi
 import { EventsPanel } from "@/components/studio/EventsPanel";
 import { isProfileSectionKind, PROFILE_SECTION_LABELS } from "@/lib/profile-section-blocks";
 import { integrationById } from "@/lib/integrations-catalog";
-import { GuestbookAccordion } from "@/components/studio/GuestbookAccordion";
-import { QuestionsInboxAccordion } from "@/components/studio/QuestionsInboxAccordion";
+import { ProfileWidgetsAccordion } from "@/components/studio/ProfileWidgetsAccordion";
 import { QaPageDesign } from "@/components/studio/QaPageDesign";
 import { StudioSectionIcon } from "@/components/studio/StudioSectionIcon";
 import { getMyTipSetup } from "@/lib/tip-page.functions";
@@ -1149,7 +1148,7 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
       <>
       {/* RIJ 2 — hoofdnavigatie van de studio */}
       <SpatialChoice<StudioTab> role="tablist" label="Studio" value={tab} onChange={setTab}
-        className="sticky top-14 z-30 w-full overflow-x-auto"
+        className="sticky top-14 z-30 w-full flex-nowrap overflow-x-auto"
         options={visibleTabs.map(({ id }) => ({ value: id, title: t(`studio.tab.${id}`), label: <><StudioSectionIcon kind={id === "links" ? "content" : id} className="size-4 text-current" />{t(`studio.tab.${id}`)}</> }))} />
 
       <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
@@ -1195,6 +1194,22 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
                   if (name) setDisplayName(name);
                   if (line) setTagline(line);
                 }}
+              />
+
+              <ProfileWidgetsAccordion
+                blocks={blocks}
+                onOpenBlockChange={setOpenBlock}
+                onAddKind={(kind, value) => addBlock(kind, value)}
+                ensureBlock={(kind) => setBlocks((current) => current.some((b) => b.kind === kind) ? current : [...current, { id: newBlockId(), kind, label: PROFILE_SECTION_LABELS[kind as keyof typeof PROFILE_SECTION_LABELS] ?? kind, value: "" }])}
+                handle={normalized || handle}
+                designLayers={prefs.designLayers}
+                onDesignLayersChange={(value) => setPref("designLayers", value)}
+                isWorkspace={isWorkspace}
+                qaSpace={alias ? "alias" : "root"}
+                displayName={displayName || null}
+                avatarUrl={avatarUrl || null}
+                prefs={prefs}
+                onPref={setPref}
                 onWidget={(id) => {
                   if (id === "questions") {
                     if (!blocks.some(b => b.kind === "widget:questions")) addBlock("widget:questions");
@@ -1213,31 +1228,7 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
                     toast.info(t("studio.editor.boardHelp"));
                   }
                 }}
-              >
-                {!isWorkspace && (
-                  <QuestionsInboxAccordion
-                    space={alias ? "alias" : "root"}
-                    handle={normalized}
-                    displayName={displayName || null}
-                    avatarUrl={avatarUrl || null}
-                    prefs={prefs}
-                    onPref={setPref}
-                  />
-                )}
-                <GuestbookAccordion enabled={prefs.guestbookEnabled} onEnabledChange={(v) => setPref("guestbookEnabled", v)} />
-
-                {/* 🏅 Badges: eigen map binnen Links & componenten, met schakelaar. */}
-                <StudioToggleCard
-                  icon={<StudioSectionIcon kind="badges" />}
-                  title={t("studio.badgesFolder").replace(/^\p{Extended_Pictographic}\s*/u, "")}
-                  subtitle={t("studio.editor.badgesHelp")}
-                  checked={prefs.badgeShowcaseVisible}
-                  onCheckedChange={(v) => setPref("badgeShowcaseVisible", v)}
-                >
-                  <BadgesPanel />
-                  <BadgeActivityPanel />
-                </StudioToggleCard>
-              </ProfileContentAccordion>
+              />
 
               {/* Favorieten horen bij je links: film, serie, boek, muziek … */}
               <ProfileFavoritesAccordion

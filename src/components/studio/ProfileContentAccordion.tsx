@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { type Dispatch, type ReactNode, type SetStateAction, useState } from "react";
-import { Plus, LayoutGrid, ChevronDown } from "lucide-react";
+import { Plus, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ProfileLinksManager } from "@/components/dashboard/editor/ProfileLinksManager";
@@ -9,8 +9,6 @@ import { scheduledBlocks, type ProfileBlock } from "@/lib/profile";
 import { StudioSectionIcon } from "./StudioSectionIcon";
 import { ProfileImportCard } from "./ProfileImportCard";
 import { Switch } from "@/components/ui/switch";
-import { normalizeDesignLayers, serializeDesignLayers } from "@/lib/design-layers";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface Props {
   cardEffects: boolean;
@@ -110,19 +108,7 @@ export function ProfileContentAccordion({
             <Switch aria-label={t("studio.effects.title")} checked={cardEffects} onCheckedChange={onCardEffectsChange} />
           </div>
         </details>
-        <details className="border-t border-border pt-4" open>
-          <summary className="flex cursor-pointer list-none items-center justify-between py-2 text-sm font-medium"><span className="flex items-center gap-2"><LayoutGrid className="size-4" />Widgets</span><ChevronDown className="size-4" /></summary>
-          <div className="space-y-4 pt-3">
-            <Button type="button" variant="outline" onClick={() => setLibraryOpen(true)}><Plus className="size-4" />Widget toevoegen</Button>
-            {blocks.filter(b => b.kind.startsWith("widget:") || ["live", "audio_player", "media_gallery", "countdown", "newsletter", "feedback", "contact_form", "live_poll"].includes(b.kind)).map(b => {
-              const layers = normalizeDesignLayers(designLayers);
-              const tile = layers.blockStyles[b.id];
-              const patch = (change: { width?: 1 | 2; height?: "auto" | "medium" | "tall" }) => onDesignLayersChange?.(serializeDesignLayers({ ...layers, blockStyles: { ...layers.blockStyles, [b.id]: { ...(tile ?? { bg: null, text: null, radius: null, shadow: "none" as const }), ...change } } }));
-              return <div key={b.id} className="space-y-2 border-b border-border pb-3"><p className="break-words text-sm font-medium">{b.label || b.kind.replace("widget:", "")}</p><div className="grid grid-cols-2 gap-2"><Select value={String(tile?.width ?? 2)} onValueChange={v => patch({ width: v === "1" ? 1 : 2 })}><SelectTrigger aria-label={`${b.label || b.kind} breedte`}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="1">Halve breedte</SelectItem><SelectItem value="2">Volle breedte</SelectItem></SelectContent></Select><Select value={tile?.height ?? "auto"} onValueChange={v => patch({ height: v as "auto" | "medium" | "tall" })}><SelectTrigger aria-label={`${b.label || b.kind} hoogte`}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="auto">Automatisch</SelectItem><SelectItem value="medium">Hoog</SelectItem><SelectItem value="tall">Extra hoog</SelectItem></SelectContent></Select></div><Button type="button" variant="ghost" size="sm" onClick={() => onOpenBlockChange(b.id)}>Onderdeel bewerken</Button></div>;
-            })}
-            {children}
-          </div>
-        </details>
+
       </AccordionContent>
     </AccordionItem>
   );
