@@ -1,7 +1,7 @@
 # ROUT repository import
 
-- [ ] Compare all repository files and restore unintended source differences.
-- [ ] Connect Neon after the source comparison; validate without changing database permissions or records.
+- [x] Compare all repository files: none missing; two necessary Studio compatibility corrections retained, so source is not byte-identical.
+- [x] Connect Neon and validate the existing rout_app role without changing database permissions or records.
 
 - [x] Import application source and visual assets without repository metadata or secrets.
 - [x] Install source dependencies and preserve managed project setup.
