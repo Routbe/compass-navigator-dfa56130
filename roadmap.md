@@ -1,10 +1,10 @@
 # ROUT repository import
 
 ## Homepage and About refinement
-- [ ] Review requested animation/UI references and preserve ROUT identity.
-- [ ] Refine black-only homepage with responsive, reduced-motion-aware animation.
-- [ ] Improve About page presentation in the standard ROUT light/dark theme; leave developer identity distinct.
-- [ ] Verify mobile/desktop rendering, navigation and affected tests.
+- [x] Review OriginKit, Kokonut UI, Bklit UI, Awwwards MCP and fluid/shader references; use Anime.js rather than installing overlapping kits or copying shaders.
+- [x] Refine black-only homepage with Anime.js reveals and original fluid-inspired GLSL ribbons in the existing interactive globe scene.
+- [x] Improve shared About reading hierarchy, navigation contrast and identity artwork; preserve standard light/dark theme and distinct developer pages.
+- [x] Verify 320/390/791/1280 px layouts, actual WebGL readiness, link-to-QR navigation, reduced motion and About dark mode; 11 docs tests passed with no browser runtime errors.
 
 ## Studio usability
 - [x] Connect Widgets folder and remove nested widget controls from Links and components; add NL/EN/FR/DE labels.
