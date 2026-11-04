@@ -12,6 +12,7 @@
     "desktopAndPhone": "Public homepage scrolls to bottom; platform menu opens with tools and infrastructure links and closes with Escape.",
     "metadata": "Content routes include local heads; index uses socialMeta and documentation uses docHead.",
     "accountsAndData": "Blocked: original account/database/service credentials unavailable; /auth destination was inspected but navigation/account creation not verified.",
-    "media": "Existing repository assets and visual components retained; no replacement/static fallback introduced. Detailed section-by-section motion parity was not verified."
+    "media": "Existing repository assets and visual components retained; no replacement/static fallback introduced. Detailed section-by-section motion parity was not verified.",
+    "remainingVerification": "Detailed section-by-section media/motion, menu settled-state text clipping, and account navigation remain unverified."
   }
 }
