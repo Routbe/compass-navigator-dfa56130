@@ -34,9 +34,11 @@
 ## Full audit (Nov 2026 request)
 - [x] Workspace switch buttons: hard navigation after cookie set, error toast when unavailable, double-tap guard.
 - [ ] Full UI check phone/tablet/desktop (logged-in screens blocked without ROUT session).
-- [ ] Translation audit: all buttons, popups, hidden labels in NL/EN/FR/DE (start: ProfileMenu hardcoded Dutch).
-- [ ] Wallet card "move your phone" tilt interaction rework.
+- [ ] Translation audit: all buttons, popups, hidden labels in NL/EN/FR/DE (button style panel done; ~90 screens still contain fixed Dutch text).
+- [x] Wallet card "move your phone": only switches from touch/mouse to motion once the sensor really reports; otherwise a translated notice.
 - [ ] Developer console audit end-to-end.
 - [ ] Cloud console + Login with ROUT consent prompt polish; email matching with editable email setting.
-- [ ] Tours: no premature steps (anonymous questions), add tours where useful.
+- [x] Tours: removed premature anonymous-question/guestbook explanations (NL/EN/FR/DE).
+- [ ] Tours: add new tours where useful.
 - [ ] Re-read everything after the above and continue on remaining weak spots.
+- [x] Favicon/app icons: bunny logo, transparent outside, all sizes.

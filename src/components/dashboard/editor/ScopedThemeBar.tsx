@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
@@ -85,15 +86,16 @@ const glassTargetOf = (scope: ThemeScope): (keyof GlassTargets)[] =>
 
 /** Native select met compacte overlay: op 360px duwt hij de titel nooit weg. */
 export function ThemeScopeSelect({ scope, onChange, allowedScopes }: { scope: ThemeScope; onChange: (s: ThemeScope) => void; allowedScopes?: readonly ThemeScope[] }) {
+  const { t } = useTranslation();
   const list = SCOPES.filter((s) => (allowedScopes ?? PROFILE_SCOPES).includes(s.id));
   const cur = list.find((s) => s.id === scope) ?? list[0];
   return (
     <label className="relative inline-flex h-9 max-w-[8.5rem] shrink-0 items-center gap-1 rounded-full border border-border bg-background px-3 text-xs font-medium focus-within:ring-2 focus-within:ring-ring sm:max-w-none">
-      <span className="truncate sm:hidden">{cur?.short}</span>
-      <span className="hidden truncate sm:inline">{cur?.label}</span>
+      <span className="truncate sm:hidden">{cur ? t(`studio.themeBar.scope.${cur.id}.short`, { defaultValue: cur.short }) : null}</span>
+      <span className="hidden truncate sm:inline">{cur ? t(`studio.themeBar.scope.${cur.id}`, { defaultValue: cur.label }) : null}</span>
       <ChevronDown className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden />
-      <select aria-label="Stijl toepassen op" value={scope} onChange={(e) => onChange(e.target.value as ThemeScope)} className="absolute inset-0 cursor-pointer opacity-0">
-        {list.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
+      <select aria-label={t("studio.themeBar.applyTo")} value={scope} onChange={(e) => onChange(e.target.value as ThemeScope)} className="absolute inset-0 cursor-pointer opacity-0">
+        {list.map((s) => <option key={s.id} value={s.id}>{t(`studio.themeBar.scope.${s.id}`, { defaultValue: s.label })}</option>)}
       </select>
     </label>
   );
@@ -106,6 +108,7 @@ export function ScopedThemeBar({ prefs, setPref, scope = "all", showTypography =
   const custom = prefs.buttonsCustom;
   const glassOn = tokens.glassStyle !== "solid";
   useLiquidGlassRuntime();
+  const { t } = useTranslation();
 
   const widgetScope = ["widgets", "booking", "board", "presence", "questions", "answers"].includes(scope);
   const patch = (input: ScopeOverride) => {
@@ -144,19 +147,19 @@ export function ScopedThemeBar({ prefs, setPref, scope = "all", showTypography =
         <div className="flex flex-wrap items-center gap-2">
           {unique ? (
             <>
-              <span className="text-xs font-medium text-primary">● Unieke stijl</span>
-              <Button type="button" size="sm" variant="outline" onClick={reset}>Herstel naar standaard</Button>
+              <span className="text-xs font-medium text-primary">{t("studio.themeBar.unique")}</span>
+              <Button type="button" size="sm" variant="outline" onClick={reset}>{t("studio.themeBar.reset")}</Button>
             </>
           ) : (
-            <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">Volgt standaard</span>
+            <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">{t("studio.themeBar.followsDefault")}</span>
           )}
         </div>
       )}
 
       <div className="space-y-2">
         <div className="flex min-w-0 items-center gap-2">
-          <p className="input-label">Knopvorm</p>
-          <CustomizeButton open={custom} onToggle={() => setPref("buttonsCustom", !custom)} label="Knopvorm aanpassen" controls="button-advanced" />
+          <p className="input-label">{t("studio.themeBar.shape")}</p>
+          <CustomizeButton open={custom} onToggle={() => setPref("buttonsCustom", !custom)} label={t("studio.themeBar.shapeCustomize")} controls="button-advanced" />
         </div>
         {!custom && (
           <div className="flex flex-wrap gap-1.5">
@@ -193,75 +196,75 @@ export function ScopedThemeBar({ prefs, setPref, scope = "all", showTypography =
 
       {custom && (
         <div id="button-advanced" className="space-y-4 rounded-2xl border border-border p-3 sm:p-4">
-          <Group label="Knopstijl">
+          <Group label={t("studio.themeBar.style")}>
             {variants.map((v) => <StudioChip key={v.id} active={design.buttonVariant === v.id} onClick={() => patch({ buttonVariant: v.id as ScopeOverride["buttonVariant"] })}>{v.label}</StudioChip>)}
           </Group>
-          <Group label="Hoekafronding">
+          <Group label={t("studio.themeBar.radius")}>
             {radii.map((r) => <StudioChip key={r.id} active={design.buttonRadius === r.id} onClick={() => patch({ buttonRadius: r.id as ScopeOverride["buttonRadius"] })}>{r.label}</StudioChip>)}
           </Group>
           <div className="grid grid-cols-2 gap-3">
             <label className="space-y-1 text-xs">
-              <span className="input-label block">Knopkleur</span>
+              <span className="input-label block">{t("studio.themeBar.color")}</span>
               <input type="color" className="h-9 w-full rounded-md border border-border bg-background" value={design.buttonColor ?? "#000000"} onChange={(e) => patch({ buttonColor: e.target.value })} />
             </label>
             <div className="space-y-1 text-xs">
               <label className="flex items-center justify-between gap-2">
-                <span className="input-label block">Knoprand</span>
+                <span className="input-label block">{t("studio.themeBar.border")}</span>
                 <Switch
                   checked={Boolean(design.buttonBorderColor)}
                   onCheckedChange={(on) => patch({ buttonBorderColor: on ? (design.buttonColor ?? "#000000") : null })}
-                  aria-label="Knoprand aan of uit"
+                  aria-label={t("studio.themeBar.borderToggle")}
                 />
               </label>
               {design.buttonBorderColor ? (
-                <input type="color" aria-label="Knoprandkleur" className="h-9 w-full rounded-md border border-border bg-background" value={design.buttonBorderColor} onChange={(e) => patch({ buttonBorderColor: e.target.value })} />
+                <input type="color" aria-label={t("studio.themeBar.borderColor")} className="h-9 w-full rounded-md border border-border bg-background" value={design.buttonBorderColor} onChange={(e) => patch({ buttonBorderColor: e.target.value })} />
               ) : (
-                <p className="text-[11px] text-muted-foreground">Uit: de knopstijl bepaalt de rand.</p>
+                <p className="text-[11px] text-muted-foreground">{t("studio.themeBar.borderOff")}</p>
               )}
             </div>
           </div>
           {scope === "all" && <>
-            <Group label="Linkweergave">
-              {([["bar", "Balk met naam"], ["icon", "Icoontjes onder bio"], ["both", "Beide"]] as const).map(([id, label]) => <StudioChip key={id} active={prefs.buttonShape === id} onClick={() => setPref("buttonShape", id)}>{label}</StudioChip>)}
+            <Group label={t("studio.themeBar.linkDisplay")}>
+              {([["bar", t("studio.themeBar.shapeBar")], ["icon", t("studio.themeBar.shapeIcon")], ["both", t("studio.themeBar.shapeBoth")]] as const).map(([id, label]) => <StudioChip key={id} active={prefs.buttonShape === id} onClick={() => setPref("buttonShape", id)}>{label}</StudioChip>)}
             </Group>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="space-y-1 text-xs"><span className="input-label">Knopgrootte</span><Select value={prefs.buttonSize} onValueChange={(value) => setPref("buttonSize", value as ProfileDisplayPrefs["buttonSize"])}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{BUTTON_SIZES.map((item) => <SelectItem key={item.id} value={item.id}>{item.label}</SelectItem>)}</SelectContent></Select></label>
-              <label className="space-y-1 text-xs"><span className="input-label">Beweging</span><Select value={prefs.buttonEffect} onValueChange={(value) => setPref("buttonEffect", value as ProfileDisplayPrefs["buttonEffect"])}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{BUTTON_EFFECTS.map((item) => <SelectItem key={item.id} value={item.id}>{item.label}</SelectItem>)}</SelectContent></Select></label>
+              <label className="space-y-1 text-xs"><span className="input-label">{t("studio.themeBar.size")}</span><Select value={prefs.buttonSize} onValueChange={(value) => setPref("buttonSize", value as ProfileDisplayPrefs["buttonSize"])}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{BUTTON_SIZES.map((item) => <SelectItem key={item.id} value={item.id}>{item.label}</SelectItem>)}</SelectContent></Select></label>
+              <label className="space-y-1 text-xs"><span className="input-label">{t("studio.themeBar.motion")}</span><Select value={prefs.buttonEffect} onValueChange={(value) => setPref("buttonEffect", value as ProfileDisplayPrefs["buttonEffect"])}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{BUTTON_EFFECTS.map((item) => <SelectItem key={item.id} value={item.id}>{item.label}</SelectItem>)}</SelectContent></Select></label>
             </div>
           </>}
 
           <div className="space-y-3 border-t border-border pt-3">
             <label className="flex items-center justify-between gap-3 text-sm font-medium">
-              Glaseffect
+              {t("studio.themeBar.glass")}
               <Switch checked={glassOn} onCheckedChange={(v) => patch({ glassStyle: v ? "frosted-light" : "solid" })} />
             </label>
             {glassOn && <>
-              <Group label="Recept">
+              <Group label={t("studio.themeBar.recipe")}>
                 {GLASS_RECIPES.map((g) => <StudioChip key={g.id} active={(Object.keys(g.patch) as (keyof ScopeOverride)[]).every((k) => tokens[k as keyof typeof tokens] === g.patch[k])} onClick={() => patch(g.patch)}>{g.label}</StudioChip>)}
               </Group>
-              <Group label="Soort glas">
+              <Group label={t("studio.themeBar.glassType")}>
                 {GLASS_TYPES.map((g) => <StudioChip key={g.id} active={tokens.glassStyle === g.id} onClick={() => patch({ glassStyle: g.id })}>{g.label}</StudioChip>)}
               </Group>
               <div className="relative overflow-hidden rounded-2xl p-5">
                 <GlassBackdrop detailed />
                 <div className="relative space-y-2.5">
-                  {["Mijn website", "Boek een afspraak"].map((label) => (
+                  {[t("studio.themeBar.sampleSite"), t("studio.themeBar.sampleBook")].map((label) => (
                     <div key={label} className={`px-4 py-3 text-center text-sm font-medium ${RADIUS_CLASS[design.buttonRadius ?? "xl"]} ${tokens.glassStyle === "frosted-light" || tokens.glassStyle === "prism" ? "text-foreground" : "text-primary-foreground"}`} style={sample ?? undefined}>{label}</div>
                   ))}
                 </div>
-                <p className="relative mt-3 text-center text-[11px] text-primary-foreground/80">Beweeg je muis of vinger over de knoppen</p>
+                <p className="relative mt-3 text-center text-[11px] text-primary-foreground/80">{t("studio.themeBar.hoverHint")}</p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
-                <GlassSlider label="Transparantie" unit="%" min={5} max={50} value={tokens.glassOpacity} onChange={(v) => patch({ glassOpacity: v })} />
-                <GlassSlider label="Vervaging" unit="px" min={4} max={32} value={tokens.glassBlur} onChange={(v) => patch({ glassBlur: v })} />
-                <GlassSlider label="Kleurverzadiging" unit="%" min={100} max={200} value={tokens.glassSaturation} onChange={(v) => patch({ glassSaturation: v })} />
-                <GlassSlider label="Lichtbreking" unit="" min={0} max={100} value={tokens.glassRefraction} onChange={(v) => patch({ glassRefraction: v })} />
-                <GlassSlider label="Prismarand" unit="" min={0} max={50} value={tokens.glassAberration} format={(v) => (v / 10).toFixed(1)} onChange={(v) => patch({ glassAberration: v })} />
-                <GlassSlider label="Glans" unit="%" min={0} max={100} value={tokens.glassSpecular} onChange={(v) => patch({ glassSpecular: v })} />
+                <GlassSlider label={t("studio.themeBar.opacity")} unit="%" min={5} max={50} value={tokens.glassOpacity} onChange={(v) => patch({ glassOpacity: v })} />
+                <GlassSlider label={t("studio.themeBar.blur")} unit="px" min={4} max={32} value={tokens.glassBlur} onChange={(v) => patch({ glassBlur: v })} />
+                <GlassSlider label={t("studio.themeBar.saturation")} unit="%" min={100} max={200} value={tokens.glassSaturation} onChange={(v) => patch({ glassSaturation: v })} />
+                <GlassSlider label={t("studio.themeBar.refraction")} unit="" min={0} max={100} value={tokens.glassRefraction} onChange={(v) => patch({ glassRefraction: v })} />
+                <GlassSlider label={t("studio.themeBar.aberration")} unit="" min={0} max={50} value={tokens.glassAberration} format={(v) => (v / 10).toFixed(1)} onChange={(v) => patch({ glassAberration: v })} />
+                <GlassSlider label={t("studio.themeBar.specular")} unit="%" min={0} max={100} value={tokens.glassSpecular} onChange={(v) => patch({ glassSpecular: v })} />
               </div>
-              <p className="text-[11px] text-muted-foreground">Lichtbreking en prismarand tonen in Chrome, Edge en Android. Safari en Firefox tonen het matglas zonder breking.</p>
-              <Group label="Rand">
-                {BORDERS.map((b) => <StudioChip key={b.id} active={tokens.glassBorder === b.id} onClick={() => patch({ glassBorder: b.id })}>{b.label}</StudioChip>)}
+              <p className="text-[11px] text-muted-foreground">{t("studio.themeBar.browserNote")}</p>
+              <Group label={t("studio.themeBar.edge")}>
+                {BORDERS.map((b) => <StudioChip key={b.id} active={tokens.glassBorder === b.id} onClick={() => patch({ glassBorder: b.id })}>{t(`studio.themeBar.border.${b.id}`)}</StudioChip>)}
               </Group>
             </>}
           </div>
@@ -270,16 +273,16 @@ export function ScopedThemeBar({ prefs, setPref, scope = "all", showTypography =
 
       {showTypography && (
         <div className="space-y-3">
-          <Group label="Typografie">
+          <Group label={t("studio.themeBar.typography")}>
             {FONT_PAIRINGS.map((f) => <StudioChip key={f.id} active={design.fontPairing === f.id} onClick={() => patch({ fontPairing: f.id as ScopeOverride["fontPairing"] })}>{f.label}</StudioChip>)}
           </Group>
           <div className="flex items-end gap-2 text-xs">
             <label className="flex-1 space-y-1">
-              <span className="input-label block">Knoptekstkleur</span>
+              <span className="input-label block">{t("studio.themeBar.textColor")}</span>
               <input type="color" className="h-9 w-full rounded-md border border-border bg-background" value={design.buttonTextColor ?? "#ffffff"} onChange={(e) => patch({ buttonTextColor: e.target.value })} />
             </label>
             {design.buttonTextColor && (
-              <Button type="button" size="sm" variant="ghost" onClick={() => patch({ buttonTextColor: null })}>Automatisch</Button>
+              <Button type="button" size="sm" variant="ghost" onClick={() => patch({ buttonTextColor: null })}>{t("studio.themeBar.auto")}</Button>
             )}
           </div>
         </div>
