@@ -1782,5 +1782,35 @@
   "workspace.role.owner": "Propriétaire",
   "workspace.role.viewer": "Lecteur",
   "workspace.switch": "Changer d’espace",
-  "workspace.switchError": "Impossible de changer d’espace."
+  "workspace.switchError": "Impossible de changer d’espace.",
+  "shareWidget.shareTo": "Partager sur",
+  "shareWidget.storyHint": "Touchez le lien",
+  "shareWidget.linkReady": "Lien copié — collez-le en sticker Lien",
+  "shareWidget.tappableNote": "Votre lien est copié automatiquement. Sur Snapchat, il est joint directement à votre snap ; sur Instagram, collez-le en sticker Lien pour que tout le monde puisse le toucher.",
+  "shareWidget.story.hub": "Découvre mon ROUT",
+  "shareWidget.story.ask": "Envoie-moi une question anonyme",
+  "shareWidget.story.donate": "Soutiens-moi par un don",
+  "shareWidget.story.tip": "Laisse-moi un pourboire",
+  "shareWidget.story.booking": "Prends rendez-vous avec moi",
+  "shareWidget.story.live": "Viens voir, je suis en direct",
+  "shareWidget.platform.snapchat": "Snapchat",
+  "shareWidget.platform.instagram": "Instagram",
+  "shareWidget.platform.whatsapp": "WhatsApp",
+  "shareWidget.platform.more": "Plus",
+  "shareWidget.guide.next": "Étape suivante",
+  "shareWidget.guide.go": "Compris, partager !",
+  "shareWidget.guide.snapchat.title": "Comment ajouter ton lien à ta story Snapchat",
+  "shareWidget.guide.snapchat.steps": [
+    "Snapchat s'ouvre avec ton lien déjà joint.",
+    "Tu veux l'image aussi ? Choisis-la dans ta pellicule.",
+    "Touche Story pour publier.",
+    "Les spectateurs touchent le lien et arrivent sur ta page."
+  ],
+  "shareWidget.guide.instagram.title": "Comment ajouter le lien à ta story Instagram",
+  "shareWidget.guide.instagram.steps": [
+    "Ton lien est copié. Choisis Story Instagram dans le menu de partage.",
+    "Touche l'icône sticker en haut.",
+    "Choisis le sticker Lien et colle ton lien.",
+    "Place le sticker et partage ta story."
+  ]
 }
