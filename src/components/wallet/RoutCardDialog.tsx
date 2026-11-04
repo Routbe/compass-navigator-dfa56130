@@ -1,4 +1,3 @@
-import type React from "react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useServerFn } from "@tanstack/react-start";
@@ -700,7 +699,7 @@ export function RoutCardDialog({ open, onOpenChange, handle, space, inline = fal
   );
 }
 
-function Frame({ inline, open, onOpenChange, children }: { inline: boolean; open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode }) {
+function Frame({ inline, open, onOpenChange, children }: { inline: boolean; open: boolean; onOpenChange: (v: boolean) => void; children: ReactNode }) {
   if (inline) return <Dialog open modal={false}><section className="mx-auto w-full max-w-md space-y-4 [&_[data-slot=dialog-header]]:text-left">{children}</section></Dialog>;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
