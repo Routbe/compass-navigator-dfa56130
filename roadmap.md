@@ -31,3 +31,12 @@
 - [x] Check public scrolling and platform menus on desktop and phone; account destinations remain unverified.
 - [x] Run relevant imported tests (23 passed) and inspect preview errors (build OK).
 - [x] Record import results and external-service limitations.
+## Full audit (Nov 2026 request)
+- [x] Workspace switch buttons: hard navigation after cookie set, error toast when unavailable, double-tap guard.
+- [ ] Full UI check phone/tablet/desktop (logged-in screens blocked without ROUT session).
+- [ ] Translation audit: all buttons, popups, hidden labels in NL/EN/FR/DE (start: ProfileMenu hardcoded Dutch).
+- [ ] Wallet card "move your phone" tilt interaction rework.
+- [ ] Developer console audit end-to-end.
+- [ ] Cloud console + Login with ROUT consent prompt polish; email matching with editable email setting.
+- [ ] Tours: no premature steps (anonymous questions), add tours where useful.
+- [ ] Re-read everything after the above and continue on remaining weak spots.
