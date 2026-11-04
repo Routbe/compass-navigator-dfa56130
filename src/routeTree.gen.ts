@@ -81,6 +81,7 @@ import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedDomainsRouteImport } from './routes/_authenticated/domains'
 import { Route as AuthenticatedMyDataRouteImport } from './routes/_authenticated/my-data'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedWalletRouteImport } from './routes/_authenticated/wallet'
 import { Route as APublicIdRouteImport } from './routes/a.$publicId'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutAnonymousQuestionsRouteImport } from './routes/about.anonymous-questions'
@@ -763,6 +764,11 @@ const AuthenticatedMyDataRoute = AuthenticatedMyDataRouteImport.update({
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedWalletRoute = AuthenticatedWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const APublicIdRoute = APublicIdRouteImport.update({
@@ -2561,6 +2567,7 @@ export interface FileRoutesByFullPath {
   '/domains': typeof AuthenticatedDomainsRoute
   '/my-data': typeof AuthenticatedMyDataRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/wallet': typeof AuthenticatedWalletRoute
   '/a/$publicId': typeof APublicIdRoute
   '/about/anonymous-questions': typeof AboutAnonymousQuestionsRoute
   '/about/badges': typeof AboutBadgesRoute
@@ -2942,6 +2949,7 @@ export interface FileRoutesByTo {
   '/domains': typeof AuthenticatedDomainsRoute
   '/my-data': typeof AuthenticatedMyDataRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/wallet': typeof AuthenticatedWalletRoute
   '/a/$publicId': typeof APublicIdRoute
   '/about/anonymous-questions': typeof AboutAnonymousQuestionsRoute
   '/about/badges': typeof AboutBadgesRoute
@@ -3336,6 +3344,7 @@ export interface FileRoutesById {
   '/_authenticated/domains': typeof AuthenticatedDomainsRoute
   '/_authenticated/my-data': typeof AuthenticatedMyDataRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/wallet': typeof AuthenticatedWalletRoute
   '/a/$publicId': typeof APublicIdRoute
   '/about/anonymous-questions': typeof AboutAnonymousQuestionsRoute
   '/about/badges': typeof AboutBadgesRoute
@@ -3733,6 +3742,7 @@ export interface FileRouteTypes {
     | '/domains'
     | '/my-data'
     | '/settings'
+    | '/wallet'
     | '/a/$publicId'
     | '/about/anonymous-questions'
     | '/about/badges'
@@ -4114,6 +4124,7 @@ export interface FileRouteTypes {
     | '/domains'
     | '/my-data'
     | '/settings'
+    | '/wallet'
     | '/a/$publicId'
     | '/about/anonymous-questions'
     | '/about/badges'
@@ -4507,6 +4518,7 @@ export interface FileRouteTypes {
     | '/_authenticated/domains'
     | '/_authenticated/my-data'
     | '/_authenticated/settings'
+    | '/_authenticated/wallet'
     | '/a/$publicId'
     | '/about/anonymous-questions'
     | '/about/badges'
@@ -5549,6 +5561,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/wallet': {
+      id: '/_authenticated/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof AuthenticatedWalletRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/a/$publicId': {
@@ -7953,6 +7972,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDomainsRoute: typeof AuthenticatedDomainsRoute
   AuthenticatedMyDataRoute: typeof AuthenticatedMyDataRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedWalletRoute: typeof AuthenticatedWalletRoute
   AuthenticatedDashboardAssetsRoute: typeof AuthenticatedDashboardAssetsRoute
   AuthenticatedDashboardBlueskyRoute: typeof AuthenticatedDashboardBlueskyRoute
   AuthenticatedDashboardDomainsRoute: typeof AuthenticatedDashboardDomainsRoute
@@ -7979,6 +7999,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDomainsRoute: AuthenticatedDomainsRoute,
   AuthenticatedMyDataRoute: AuthenticatedMyDataRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedWalletRoute: AuthenticatedWalletRoute,
   AuthenticatedDashboardAssetsRoute: AuthenticatedDashboardAssetsRoute,
   AuthenticatedDashboardBlueskyRoute: AuthenticatedDashboardBlueskyRoute,
   AuthenticatedDashboardDomainsRoute: AuthenticatedDashboardDomainsRoute,
