@@ -1,6 +1,8 @@
 import { saturation, walletCardColor } from "./wallet-art";
 import { cardNumberFromDigest } from "./card-number";
 import { createLocalizedString, walletText } from "./wallet-i18n";
+import { GOOGLE_PASS_DESIGN, googleArtworkVersion } from "./google-premium-art";
+import type { GoogleCardClaims, GoogleGenericObject } from "./google-pass-types";
 /**
  * Wallet pass content for profiles and events (pure, browser-safe).
  * Apple (.pkpass pass.json) and Google (Generic pass object) are built from the
@@ -236,36 +238,43 @@ export function walletHeroUrl(card: Pick<WalletCardPayload, "url" | "handle" | "
 }
 
 /** Google Generic object for a ROUT Card. */
-export function googleCardObject(card: WalletCardPayload, issuerId: string, classId = `${issuerId}.rout_card`) {
-  const i18n = (value: string) => createLocalizedString({ nl: value, en: value, fr: value, de: value });
+export function googleCardObject(card: WalletCardPayload, issuerId: string, classId = `${issuerId}.rout_card`): GoogleGenericObject {
+  const i18n = (value: string) => {
+    const localized = createLocalizedString({ nl: value, en: value, fr: value, de: value }, "nl");
+    return { ...localized, defaultValue: { ...localized.defaultValue, language: "nl-NL" } };
+  };
   return {
     id: `${issuerId}.${card.serial.replace(/[^a-zA-Z0-9._-]/g, "_")}`,
     classId,
     state: "ACTIVE",
-    hexBackgroundColor: card.hexBackgroundColor,
-    logo: { sourceUri: { uri: walletAssetUrl(card, "rout-logo.png") }, contentDescription: i18n("ROUT") },
+    hexBackgroundColor: GOOGLE_PASS_DESIGN.background,
+    logo: { sourceUri: { uri: walletAssetUrl(card, "rout-premium-logo-v1.png") }, contentDescription: i18n("ROUT") },
     cardTitle: i18n("ROUT"),
     header: i18n(`@${card.handle}`),
-    subheader: i18n(card.subheader),
+    subheader: i18n(WALLET_DEFAULT_SUBHEADER),
     textModulesData: [
       { id: "name", localizedHeader: walletText("name"), body: card.displayName },
       { id: "card", localizedHeader: walletText("cardNumber"), body: card.sovereignId },
+      { id: "hub", localizedHeader: i18n(WALLET_DEFAULT_SUBHEADER), body: card.url },
       { id: "authentication", localizedHeader: walletText("authentication"), localizedBody: walletText("authenticationBody") },
       { id: "sovereignty", localizedHeader: walletText("sovereignty"), localizedBody: walletText("sovereigntyBody") },
       { id: "infrastructure", localizedHeader: walletText("infrastructure"), localizedBody: walletText("infrastructureBody") },
       { id: "emergency", localizedHeader: walletText("emergency"), localizedBody: walletText("emergencyBody") },
     ],
     barcode: { type: "QR_CODE", value: card.qrValue, alternateText: clip(card.url.replace(/^https?:\/\//, ""), 60) },
-    heroImage: { sourceUri: { uri: walletHeroUrl(card) }, contentDescription: i18n(`ROUT Card · ${card.displayName}`) },
+    heroImage: { sourceUri: { uri: googleCardArtworkUrl(card, "hero") }, contentDescription: i18n(`ROUT Card · ${card.displayName}`) },
     imageModulesData: [
-      { id: "seal", mainImage: { sourceUri: { uri: walletAssetUrl(card, "sovereign-seal-pbr.png") }, contentDescription: i18n("ROUT Sovereign Seal") } },
-      { id: "compliance", mainImage: { sourceUri: { uri: walletAssetUrl(card, "compliance-array.png") }, contentDescription: i18n("ROUT Trust Array") } },
+      { id: "strip", mainImage: { sourceUri: { uri: googleCardArtworkUrl(card, "strip") }, contentDescription: i18n("ROUT Sovereign Card") } },
     ],
     linksModuleData: { uris: [{ uri: card.url, localizedDescription: walletText("audit"), id: "open" }] },
   };
 }
 
-export function googleCardSaveClaims(card: WalletCardPayload, cfg: { issuerId: string; serviceAccountEmail: string; origins: string[]; classId?: string }) {
+export function googleCardArtworkUrl(card: WalletCardPayload, kind: "hero" | "strip"): string {
+  return new URL(`/api/wallet/render/${encodeURIComponent(walletCardId(card))}/${googleArtworkVersion(card)}/${kind}.png`, card.url).href;
+}
+
+export function googleCardSaveClaims(card: WalletCardPayload, cfg: { issuerId: string; serviceAccountEmail: string; origins: string[]; classId?: string }): GoogleCardClaims {
   const object = googleCardObject(card, cfg.issuerId, cfg.classId);
   return {
     iss: cfg.serviceAccountEmail,
@@ -273,15 +282,8 @@ export function googleCardSaveClaims(card: WalletCardPayload, cfg: { issuerId: s
     typ: "savetowallet",
     origins: cfg.origins,
     payload: { genericClasses: [{ id: object.classId, classTemplateInfo: { cardTemplateOverride: { cardRowTemplateInfos: [
-      { twoItems: {
-        startItem: { firstValue: { fields: [{ fieldPath: "object.textModulesData['name']" }] } },
-        endItem: { firstValue: { fields: [{ fieldPath: "object.textModulesData['card']" }] } },
-      } },
-      { oneItem: { item: { firstValue: { fields: [{ fieldPath: "object.textModulesData['authentication']" }] } } } },
-      { twoItems: {
-        startItem: { firstValue: { fields: [{ fieldPath: "object.textModulesData['sovereignty']" }] } },
-        endItem: { firstValue: { fields: [{ fieldPath: "object.textModulesData['emergency']" }] } },
-      } },
+      { oneItem: { item: { firstValue: { fields: [{ fieldPath: "object.textModulesData['card']" }] } } } },
+      { oneItem: { item: { firstValue: { fields: [{ fieldPath: "object.textModulesData['hub']" }] } } } },
     ] } } }], genericObjects: [object] },
   };
 }

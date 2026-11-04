@@ -33,13 +33,12 @@ describe("ROUT Card wallet payload", () => {
     expect(o.classId).toBe("3388000000000000000.rout_card");
     expect(o.header.defaultValue.value).toBe("@jona");
     // Neutral canvas is tinted with the accent: the closed pass is never flat grey.
-    expect(o.hexBackgroundColor).toBe("#216144");
+    expect(o.hexBackgroundColor).toBe("#111318");
     expect(o.barcode).toMatchObject({ type: "QR_CODE", value: "https://rout.be/@jona" });
-    expect(o.heroImage.sourceUri.uri).toMatch(/^https:\/\/rout\.be\/api\/wallet\/render\/jona\/hero\.png\?v=/);
-    expect(o.logo.sourceUri.uri).toBe("https://rout.be/assets/wallet/rout-logo.png");
+    expect(o.heroImage.sourceUri.uri).toMatch(/^https:\/\/rout\.be\/api\/wallet\/render\/jona\/[a-z0-9]+\/hero\.png$/);
+    expect(o.logo.sourceUri.uri).toBe("https://rout.be/assets/wallet/rout-premium-logo-v1.png");
     expect(o.imageModulesData.map((m) => m.mainImage.sourceUri.uri)).toEqual([
-      "https://rout.be/assets/wallet/sovereign-seal-pbr.png",
-      "https://rout.be/assets/wallet/compliance-array.png",
+      o.heroImage.sourceUri.uri.replace("hero.png", "strip.png"),
     ]);
   });
 

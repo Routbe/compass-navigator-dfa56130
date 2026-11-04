@@ -10,7 +10,7 @@ export const GOOGLE_PASS_DESIGN = {
   logoSize: 660,
   logoPadding: 0.175,
   heroWidth: 1032,
-  heroHeight: 336,
+  heroHeight: 812,
   portraitWidth: 1032,
   portraitHeight: 812,
   stripWidth: 1200,
