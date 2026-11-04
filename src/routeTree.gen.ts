@@ -378,6 +378,7 @@ import { Route as ApiPublicYoutubePushRouteImport } from './routes/api_.public.y
 import { Route as ApiUserVaultExportRouteImport } from './routes/api_.user.vault.export'
 import { Route as ApiWalletKindIdRouteImport } from './routes/api_.wallet.$kind.$id'
 import { Route as ApiWalletRenderHeroDotpngRouteImport } from './routes/api_.wallet.render.hero[.]png'
+import { Route as ApiWalletRenderPremiumLogoDotpngRouteImport } from './routes/api_.wallet.render.premium-logo[.]png'
 import { Route as SupportWorkspaceGettingStartedInviteTeamRouteImport } from './routes/support.workspace.getting-started.invite-team'
 import { Route as SupportWorkspaceGettingStartedSetupBusinessAccountRouteImport } from './routes/support.workspace.getting-started.setup-business-account'
 import { Route as SupportWorkspaceGettingStartedWhatIsAWorkspaceRouteImport } from './routes/support.workspace.getting-started.what-is-a-workspace'
@@ -401,6 +402,7 @@ import { Route as AuthenticatedStudioWWorkspaceSlugStudioRouteImport } from './r
 import { Route as ApiPublicBookingsIdActionRouteImport } from './routes/api_.public.bookings.$id.$action'
 import { Route as ApiPublicIntegrationsMastodonAvatarRouteImport } from './routes/api_.public.integrations.mastodon.avatar'
 import { Route as ApiWalletRenderCardIdHeroDotpngRouteImport } from './routes/api_.wallet.render.$cardId.hero[.]png'
+import { Route as ApiWalletRenderCardIdVersionFileRouteImport } from './routes/api_.wallet.render.$cardId.$version.$file'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -2336,6 +2338,12 @@ const ApiWalletRenderHeroDotpngRoute =
     path: '/api/wallet/render/hero.png',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiWalletRenderPremiumLogoDotpngRoute =
+  ApiWalletRenderPremiumLogoDotpngRouteImport.update({
+    id: '/api_/wallet/render/premium-logo.png',
+    path: '/api/wallet/render/premium-logo.png',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SupportWorkspaceGettingStartedInviteTeamRoute =
   SupportWorkspaceGettingStartedInviteTeamRouteImport.update({
     id: '/workspace/getting-started/invite-team',
@@ -2472,6 +2480,12 @@ const ApiWalletRenderCardIdHeroDotpngRoute =
   ApiWalletRenderCardIdHeroDotpngRouteImport.update({
     id: '/api_/wallet/render/$cardId/hero.png',
     path: '/api/wallet/render/$cardId/hero.png',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWalletRenderCardIdVersionFileRoute =
+  ApiWalletRenderCardIdVersionFileRouteImport.update({
+    id: '/api_/wallet/render/$cardId/$version/$file',
+    path: '/api/wallet/render/$cardId/$version/$file',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -2843,6 +2857,7 @@ export interface FileRoutesByFullPath {
   '/api/user/vault/export': typeof ApiUserVaultExportRoute
   '/api/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -2867,6 +2882,7 @@ export interface FileRoutesByFullPath {
   '/api/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/console/apps/$appId/': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -3219,6 +3235,7 @@ export interface FileRoutesByTo {
   '/api/user/vault/export': typeof ApiUserVaultExportRoute
   '/api/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -3243,6 +3260,7 @@ export interface FileRoutesByTo {
   '/api/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/console/apps/$appId': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -3614,6 +3632,7 @@ export interface FileRoutesById {
   '/api_/user/vault/export': typeof ApiUserVaultExportRoute
   '/api_/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api_/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api_/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -3638,6 +3657,7 @@ export interface FileRoutesById {
   '/api_/public/integrations/mastodon/avatar': typeof ApiPublicIntegrationsMastodonAvatarRoute
   '/api_/wallet/render/$cardId/hero.png': typeof ApiWalletRenderCardIdHeroDotpngRoute
   '/_authenticated/console/apps/$appId/': typeof AuthenticatedConsoleAppsAppIdIndexRoute
+  '/api_/wallet/render/$cardId/$version/$file': typeof ApiWalletRenderCardIdVersionFileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -4009,6 +4029,7 @@ export interface FileRouteTypes {
     | '/api/user/vault/export'
     | '/api/wallet/$kind/$id'
     | '/api/wallet/render/hero.png'
+    | '/api/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -4033,6 +4054,7 @@ export interface FileRouteTypes {
     | '/api/public/integrations/mastodon/avatar'
     | '/api/wallet/render/$cardId/hero.png'
     | '/console/apps/$appId/'
+    | '/api/wallet/render/$cardId/$version/$file'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -4385,6 +4407,7 @@ export interface FileRouteTypes {
     | '/api/user/vault/export'
     | '/api/wallet/$kind/$id'
     | '/api/wallet/render/hero.png'
+    | '/api/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -4409,6 +4432,7 @@ export interface FileRouteTypes {
     | '/api/public/integrations/mastodon/avatar'
     | '/api/wallet/render/$cardId/hero.png'
     | '/console/apps/$appId'
+    | '/api/wallet/render/$cardId/$version/$file'
   id:
     | '__root__'
     | '/'
@@ -4779,6 +4803,7 @@ export interface FileRouteTypes {
     | '/api_/user/vault/export'
     | '/api_/wallet/$kind/$id'
     | '/api_/wallet/render/hero.png'
+    | '/api_/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -4803,6 +4828,7 @@ export interface FileRouteTypes {
     | '/api_/public/integrations/mastodon/avatar'
     | '/api_/wallet/render/$cardId/hero.png'
     | '/_authenticated/console/apps/$appId/'
+    | '/api_/wallet/render/$cardId/$version/$file'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -5013,8 +5039,10 @@ export interface RootRouteChildren {
   ApiUserVaultExportRoute: typeof ApiUserVaultExportRoute
   ApiWalletKindIdRoute: typeof ApiWalletKindIdRoute
   ApiWalletRenderHeroDotpngRoute: typeof ApiWalletRenderHeroDotpngRoute
+  ApiWalletRenderPremiumLogoDotpngRoute: typeof ApiWalletRenderPremiumLogoDotpngRoute
   ApiPublicBookingsIdActionRoute: typeof ApiPublicBookingsIdActionRoute
   ApiWalletRenderCardIdHeroDotpngRoute: typeof ApiWalletRenderCardIdHeroDotpngRoute
+  ApiWalletRenderCardIdVersionFileRoute: typeof ApiWalletRenderCardIdVersionFileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -7602,6 +7630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWalletRenderHeroDotpngRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api_/wallet/render/premium-logo.png': {
+      id: '/api_/wallet/render/premium-logo.png'
+      path: '/api/wallet/render/premium-logo.png'
+      fullPath: '/api/wallet/render/premium-logo.png'
+      preLoaderRoute: typeof ApiWalletRenderPremiumLogoDotpngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/support/workspace/getting-started/invite-team': {
       id: '/support/workspace/getting-started/invite-team'
       path: '/workspace/getting-started/invite-team'
@@ -7761,6 +7796,13 @@ declare module '@tanstack/react-router' {
       path: '/api/wallet/render/$cardId/hero.png'
       fullPath: '/api/wallet/render/$cardId/hero.png'
       preLoaderRoute: typeof ApiWalletRenderCardIdHeroDotpngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api_/wallet/render/$cardId/$version/$file': {
+      id: '/api_/wallet/render/$cardId/$version/$file'
+      path: '/api/wallet/render/$cardId/$version/$file'
+      fullPath: '/api/wallet/render/$cardId/$version/$file'
+      preLoaderRoute: typeof ApiWalletRenderCardIdVersionFileRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -8565,8 +8607,10 @@ const rootRouteChildren: RootRouteChildren = {
   ApiUserVaultExportRoute: ApiUserVaultExportRoute,
   ApiWalletKindIdRoute: ApiWalletKindIdRoute,
   ApiWalletRenderHeroDotpngRoute: ApiWalletRenderHeroDotpngRoute,
+  ApiWalletRenderPremiumLogoDotpngRoute: ApiWalletRenderPremiumLogoDotpngRoute,
   ApiPublicBookingsIdActionRoute: ApiPublicBookingsIdActionRoute,
   ApiWalletRenderCardIdHeroDotpngRoute: ApiWalletRenderCardIdHeroDotpngRoute,
+  ApiWalletRenderCardIdVersionFileRoute: ApiWalletRenderCardIdVersionFileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
