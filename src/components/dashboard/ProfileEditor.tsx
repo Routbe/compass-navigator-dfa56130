@@ -148,8 +148,6 @@ import { SubdomainPanel } from "@/components/dashboard/SubdomainPanel";
 import { WorkspaceDomainPanel } from "@/components/dashboard/WorkspaceDomainPanel";
 import { WorkspaceAddressCard } from "@/components/workspace/WorkspaceAddressCard";
 import { workspacePublicPath } from "@/lib/workspace-rules";
-import { BadgesPanel } from "@/components/dashboard/BadgesPanel";
-import { BadgeActivityPanel } from "@/components/dashboard/BadgeActivityPanel";
 import { EmailForwardingPanel } from "@/components/dashboard/EmailForwardingPanel";
 import { EmailAliasDomains } from "@/components/dashboard/EmailAliasDomains";
 import { withAuthTimeout, authFailureMessage } from "@/lib/auth-timeout";
@@ -1180,8 +1178,6 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
               <LiveStatusAccordion prefs={prefs} setPref={setPref} composer={!isWorkspace && user ? { owner: user.id, handle: normalized || handle, space: alias ? "alias" : "root", blocks } : null} />
 
               <ProfileContentAccordion
-                designLayers={prefs.designLayers}
-                onDesignLayersChange={value => setPref("designLayers", value)}
                 cardEffects={prefs.cardEffects}
                 onCardEffectsChange={(value) => setPref("cardEffects", value)}
                 blocks={blocks}

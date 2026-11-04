@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { type Dispatch, type ReactNode, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { Plus, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ProfileLinksManager } from "@/components/dashboard/editor/ProfileLinksManager";
-import { AddComponentModal, type WidgetId } from "@/components/studio/AddComponentModal";
+import { AddComponentModal } from "@/components/studio/AddComponentModal";
 import { scheduledBlocks, type ProfileBlock } from "@/lib/profile";
 import { StudioSectionIcon } from "./StudioSectionIcon";
 import { ProfileImportCard } from "./ProfileImportCard";
@@ -20,14 +20,8 @@ interface Props {
   onOpenAddDrawer: () => void;
   /** Voegt een blok van dit type toe en opent het meteen. */
   onAddKind: (kind: string, value?: string) => void;
-  /** Extra secties (referrals, QR, badges …) onder de linklijst. */
-  children?: ReactNode;
   /** Profielhandle voor bio-verificatie in de kluis. */
   handle?: string;
-  /** Zet een profielwidget aan vanuit de catalogus. */
-  onWidget?: (id: WidgetId) => void;
-  designLayers?: string;
-  onDesignLayersChange?: (value: string) => void;
   /** Import: take over name/subtitle from a restored export. */
   onImportMeta?: (meta: { displayName: string | null; tagline: string | null }) => void;
 }
@@ -47,11 +41,7 @@ export function ProfileContentAccordion({
   onOpenBlockChange,
   onOpenAddDrawer,
   onAddKind,
-  children,
   handle,
-  onWidget,
-  designLayers,
-  onDesignLayersChange,
   onImportMeta,
 }: Props) {
   const { t } = useTranslation();
@@ -64,7 +54,7 @@ export function ProfileContentAccordion({
       className="acrylic-card px-4 sm:px-5"
     >
       <AccordionTrigger className="hover:no-underline">
-        <span className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 pr-2">
+        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 pr-2">
           <span className="flex min-w-0 items-center gap-2 text-base font-medium"><StudioSectionIcon kind="content" />{t("studio.content.title").replace(/^\p{Extended_Pictographic}\s*/u, "")}</span>
           <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
             {t("studio.content.visible", { count: live })}
@@ -83,7 +73,6 @@ export function ProfileContentAccordion({
           onClose={() => setLibraryOpen(false)}
           onAdd={onAddKind}
           handle={handle}
-          onWidget={onWidget}
         />
         <Button variant="ghost" className="h-auto min-h-10 w-full justify-start gap-2 text-left" onClick={() => {
           const grid = blocks.find((block) => block.kind === "social_grid");
