@@ -248,7 +248,7 @@ export function googleCardObject(card: WalletCardPayload, issuerId: string, clas
     classId,
     state: "ACTIVE",
     hexBackgroundColor: GOOGLE_PASS_DESIGN.background,
-    logo: { sourceUri: { uri: walletAssetUrl(card, "rout-premium-logo-v1.png") }, contentDescription: i18n("ROUT") },
+    logo: { sourceUri: { uri: new URL("/api/wallet/render/premium-logo.png", card.url).href }, contentDescription: i18n("ROUT") },
     cardTitle: i18n("ROUT"),
     header: i18n(`@${card.handle}`),
     subheader: i18n(WALLET_DEFAULT_SUBHEADER),

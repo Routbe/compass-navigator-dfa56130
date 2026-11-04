@@ -42,7 +42,7 @@ export function googlePremiumArtworkSvg(card: GoogleArtworkCard, kind: GoogleArt
   const d = GOOGLE_PASS_DESIGN;
   const [w, h] = kind === "portrait" ? [d.portraitWidth, d.portraitHeight] : kind === "strip" ? [d.stripWidth, d.stripHeight] : [d.heroWidth, d.heroHeight];
   const accent = /^#[0-9a-f]{6}$/i.test(card.accentHex ?? "") ? card.accentHex : d.gold;
-  const portrait = kind === "portrait";
+  const portrait = kind !== "strip";
   const cx = portrait ? w / 2 : w * 0.79;
   const cy = portrait ? h * 0.42 : h * 0.5;
   const radius = portrait ? 210 : h * 0.34;
