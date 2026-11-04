@@ -306,7 +306,7 @@ export default function AccountSettings() {
       crumbs={[{ label: "Instellingen" }]}
     >
       <Tabs value={tab} onValueChange={(v) => setTab(parseTab(v))} className="mt-4">
-        <TabsList data-sticky-tabs className="sticky top-20 z-30 flex h-auto w-full justify-start gap-1 overflow-x-auto whitespace-nowrap rounded-2xl border border-border bg-card/90 p-1 shadow-sm backdrop-blur-md [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap">
+        <TabsList data-sticky-tabs className="sticky top-20 z-30 flex h-auto w-full flex-nowrap justify-start gap-1 overflow-x-auto whitespace-nowrap rounded-lg p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <TabsTrigger className="h-9 shrink-0 px-3" value="profile">
             {t("settings.tabs.profile")}
           </TabsTrigger>

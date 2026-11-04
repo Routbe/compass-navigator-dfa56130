@@ -1673,6 +1673,7 @@ html[data-liquid] [style*="--lg-filter"] { backdrop-filter: var(--lg-filter) !im
   backdrop-filter: blur(24px) saturate(150%);
 }
 .spatial-track .spatial-tab { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; background-image: none; }
+.spatial-track .spatial-tab { flex-shrink: 0; min-width: max-content; max-width: none; white-space: nowrap; }
 .spatial-track .spatial-indicator { background: var(--hardware-metal); box-shadow: var(--hardware-raised); }
 .spatial-switch { padding: 2px; background: var(--hardware-cavity); box-shadow: var(--hardware-recessed); border: 1px solid var(--hardware-edge); }
 .spatial-switch[data-state="checked"] { background: color-mix(in oklab, var(--color-primary) 34%, var(--hardware-cavity)); }
@@ -1811,9 +1812,10 @@ html[data-liquid] [style*="--lg-filter"] { backdrop-filter: var(--lg-filter) !im
   backdrop-filter: blur(20px) saturate(180%);
   background-image: radial-gradient(120px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), var(--spatial-indicator), var(--optical-clear));
 }
-[data-hardware-ui] :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="hidden"]):not([type="file"]), textarea, select):not([data-profile-theme] *):not(.infra-command *):not([data-qr-container] *) {
+[data-hardware-ui] :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="hidden"]):not([type="file"]), textarea, select):not([data-profile-theme] *):not(.infra-command *):not([data-qr-container] *):not(.spatial-input input) {
   background-color: var(--hardware-cavity); border-color: var(--hardware-edge); border-bottom-color: var(--chamfer-light); box-shadow: var(--hardware-recessed);
 }
+.spatial-input > input { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
 [data-hardware-ui] :where([class~="bg-card"][class~="border"], [class~="bg-card/50"][class~="border"]):not([data-profile-theme] *):not([data-profile-theme]):not([data-qr-container]):not([data-qr-container] *):not(.preview-sheet *):not(.story-product-stage *):not(input):not(button) {
   background: var(--acrylic-base); border-color: var(--hardware-edge); border-top-color: var(--chamfer-light); box-shadow: none; backdrop-filter: blur(24px) saturate(150%);
   background-image: radial-gradient(260px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), color-mix(in oklab, var(--cursor-light) 5%, transparent), var(--optical-clear));

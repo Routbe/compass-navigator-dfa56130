@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { snappySpringPreset } from "@/lib/spatial-motion";
@@ -16,16 +16,13 @@ export function SpatialChoice<T extends string>({ value, options, onChange, labe
 }) {
   const id = useId();
   const reduced = useReducedMotion();
-  const [hovered, setHovered] = useState<T | null>(null);
-  return <div role={role} aria-label={label} className={cn("spatial-track flex max-w-full gap-1 overflow-x-auto p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden", className)} onPointerLeave={() => setHovered(null)}>
+  return <div role={role} aria-label={label} className={cn("spatial-track flex min-w-0 max-w-full gap-1 overflow-x-auto p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden", className)}>
     {options.map((option) => <Button key={option.value} type="button" variant="ghost"
       role={role === "tablist" ? "tab" : undefined}
       aria-selected={role === "tablist" ? value === option.value : undefined}
       aria-pressed={role === "group" ? value === option.value : undefined}
       tabIndex={role === "tablist" ? (value === option.value ? 0 : -1) : undefined}
       disabled={disabled || option.disabled} title={option.title}
-      onPointerEnter={() => { if (!disabled && !option.disabled) setHovered(option.value); }}
-      onFocus={() => setHovered(option.value)} onBlur={() => setHovered(null)}
       onClick={() => onChange(option.value)}
       onKeyDown={(event) => {
         if (role !== "tablist" || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
@@ -38,8 +35,8 @@ export function SpatialChoice<T extends string>({ value, options, onChange, labe
         target?.focus();
         onChange(next.value);
       }}
-      className={cn("spatial-tab flex-[1_0_auto] justify-center gap-1.5 whitespace-nowrap px-3 text-xs [&_svg]:shrink-0", value === option.value ? "text-foreground" : "text-muted-foreground")}>
-      {(hovered ?? value) === option.value && <motion.span aria-hidden className="spatial-indicator" layoutId={`choice-${id}`} transition={reduced ? { duration: 0 } : snappySpringPreset} />}
+      className={cn("spatial-tab min-w-max max-w-none flex-[1_0_auto] shrink-0 justify-center gap-1.5 whitespace-nowrap px-3 text-xs [&_svg]:shrink-0", value === option.value ? "text-foreground" : "text-muted-foreground")}>
+      {value === option.value && <motion.span aria-hidden className="spatial-indicator" layoutId={`choice-${id}`} initial={false} transition={reduced ? { duration: 0 } : snappySpringPreset} />}
       {option.label}
     </Button>)}
   </div>;
