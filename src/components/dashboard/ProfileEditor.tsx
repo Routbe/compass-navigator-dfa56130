@@ -7,6 +7,7 @@ import { EventsPanel } from "@/components/studio/EventsPanel";
 import { isProfileSectionKind, PROFILE_SECTION_LABELS } from "@/lib/profile-section-blocks";
 import { integrationById } from "@/lib/integrations-catalog";
 import { ProfileWidgetsAccordion } from "@/components/studio/ProfileWidgetsAccordion";
+import { ensureStudioWidget } from "@/lib/studio-widget-rules";
 import { QaPageDesign } from "@/components/studio/QaPageDesign";
 import { StudioSectionIcon } from "@/components/studio/StudioSectionIcon";
 import { getMyTipSetup } from "@/lib/tip-page.functions";
@@ -1200,7 +1201,7 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
                 blocks={blocks}
                 onOpenBlockChange={setOpenBlock}
                 onAddKind={(kind, value) => addBlock(kind, value)}
-                ensureBlock={(kind) => setBlocks((current) => current.some((b) => b.kind === kind) ? current : [...current, { id: newBlockId(), kind, label: PROFILE_SECTION_LABELS[kind as keyof typeof PROFILE_SECTION_LABELS] ?? kind, value: "" }])}
+                ensureBlock={(kind) => setBlocks((current) => ensureStudioWidget(current, kind))}
                 handle={normalized || handle}
                 designLayers={prefs.designLayers}
                 onDesignLayersChange={(value) => setPref("designLayers", value)}

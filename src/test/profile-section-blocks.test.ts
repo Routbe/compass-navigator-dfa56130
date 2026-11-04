@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { scheduledBlocks, type ProfileBlock } from "@/lib/profile";
 import { isProfileSectionKind, usesSectionFallback } from "@/lib/profile-section-blocks";
 describe("positionable profile sections", () => {
-  for (const kind of ["widget:guestbook", "widget:badges", "widget:reach"] as const) {
+  for (const kind of ["widget:questions", "widget:guestbook", "widget:badges", "widget:reach"] as const) {
     it(`${kind} uses fallback only without an explicit block`, () => {
       const block: ProfileBlock = { id: "section", kind, label: kind, value: "" };
       expect(isProfileSectionKind(kind)).toBe(true);
