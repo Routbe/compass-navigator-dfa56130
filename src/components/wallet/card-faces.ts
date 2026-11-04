@@ -161,15 +161,20 @@ export async function drawCardFaces(card: Omit<WalletCardPayload, "heroImageUrl"
   const cx = FACE_W / 2;
   const cy = FACE_H * 0.42;
   const r = 150;
-  const ring = f.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
-  ring.addColorStop(0, "#f59e0b");
-  ring.addColorStop(0.5, "#ec4899");
-  ring.addColorStop(1, "#8b5cf6");
-  f.strokeStyle = ring;
-  f.lineWidth = 12;
+  // Avatar only: a smooth disc with a light raised rim around it, no card patterns.
+  const rim = f.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+  rim.addColorStop(0, shade(bg, 0.32));
+  rim.addColorStop(0.5, shade(bg, 0.08));
+  rim.addColorStop(1, shade(bg, -0.2));
+  f.strokeStyle = rim;
+  f.lineWidth = 7;
   f.beginPath();
-  f.arc(cx, cy, r + 14, 0, Math.PI * 2);
+  f.arc(cx, cy, r + 3.5, 0, Math.PI * 2);
   f.stroke();
+  f.fillStyle = shade(bg, 0.1);
+  f.beginPath();
+  f.arc(cx, cy, r, 0, Math.PI * 2);
+  f.fill();
   f.save();
   f.beginPath();
   f.arc(cx, cy, r, 0, Math.PI * 2);

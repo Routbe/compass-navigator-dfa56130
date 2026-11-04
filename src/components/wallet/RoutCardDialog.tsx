@@ -1,3 +1,4 @@
+import type React from "react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useServerFn } from "@tanstack/react-start";
@@ -58,7 +59,7 @@ function defaultMaterialFor(fg: string): CardMaterial {
  * "ROUT Card": a 3D digital twin of the member's card, plus Google Wallet,
  * Apple Wallet and vCard exports — all from the same server-built payload.
  */
-export function RoutCardDialog({ open, onOpenChange, handle, space }: { open: boolean; onOpenChange: (v: boolean) => void; handle: string; space?: "root" | "alias" }) {
+export function RoutCardDialog({ open, onOpenChange, handle, space, inline = false }: { open: boolean; onOpenChange: (v: boolean) => void; handle: string; space?: "root" | "alias"; /** Renders the same manager as a page section instead of a popup. */ inline?: boolean }) {
   const { t } = useTranslation();
   const loadCard = useServerFn(getWalletCard);
   const loadStatus = useServerFn(getWalletStatus);
@@ -517,8 +518,7 @@ export function RoutCardDialog({ open, onOpenChange, handle, space }: { open: bo
   const flat = images ? <FlatCard faces={images} flipped={flipped} tilt={flatTilt} onFlip={flip} /> : null;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[95vh] overflow-y-auto sm:max-w-md">
+    <Frame inline={inline} open={open} onOpenChange={onOpenChange}>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Wallet className="h-5 w-5" aria-hidden /> {t("card.title")}
@@ -696,7 +696,15 @@ export function RoutCardDialog({ open, onOpenChange, handle, space }: { open: bo
           </div>
         )}
 
-      </DialogContent>
+    </Frame>
+  );
+}
+
+function Frame({ inline, open, onOpenChange, children }: { inline: boolean; open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode }) {
+  if (inline) return <Dialog open modal={false}><section className="mx-auto w-full max-w-md space-y-4 [&_[data-slot=dialog-header]]:text-left">{children}</section></Dialog>;
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-h-[95vh] overflow-y-auto sm:max-w-md">{children}</DialogContent>
     </Dialog>
   );
 }
