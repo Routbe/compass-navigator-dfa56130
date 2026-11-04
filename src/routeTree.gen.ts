@@ -378,6 +378,7 @@ import { Route as ApiPublicYoutubePushRouteImport } from './routes/api_.public.y
 import { Route as ApiUserVaultExportRouteImport } from './routes/api_.user.vault.export'
 import { Route as ApiWalletKindIdRouteImport } from './routes/api_.wallet.$kind.$id'
 import { Route as ApiWalletRenderHeroDotpngRouteImport } from './routes/api_.wallet.render.hero[.]png'
+import { Route as ApiWalletRenderPremiumLogoDotpngRouteImport } from './routes/api_.wallet.render.premium-logo[.]png'
 import { Route as SupportWorkspaceGettingStartedInviteTeamRouteImport } from './routes/support.workspace.getting-started.invite-team'
 import { Route as SupportWorkspaceGettingStartedSetupBusinessAccountRouteImport } from './routes/support.workspace.getting-started.setup-business-account'
 import { Route as SupportWorkspaceGettingStartedWhatIsAWorkspaceRouteImport } from './routes/support.workspace.getting-started.what-is-a-workspace'
@@ -2337,6 +2338,12 @@ const ApiWalletRenderHeroDotpngRoute =
     path: '/api/wallet/render/hero.png',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiWalletRenderPremiumLogoDotpngRoute =
+  ApiWalletRenderPremiumLogoDotpngRouteImport.update({
+    id: '/api_/wallet/render/premium-logo.png',
+    path: '/api/wallet/render/premium-logo.png',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SupportWorkspaceGettingStartedInviteTeamRoute =
   SupportWorkspaceGettingStartedInviteTeamRouteImport.update({
     id: '/workspace/getting-started/invite-team',
@@ -2850,6 +2857,7 @@ export interface FileRoutesByFullPath {
   '/api/user/vault/export': typeof ApiUserVaultExportRoute
   '/api/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -3227,6 +3235,7 @@ export interface FileRoutesByTo {
   '/api/user/vault/export': typeof ApiUserVaultExportRoute
   '/api/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -3623,6 +3632,7 @@ export interface FileRoutesById {
   '/api_/user/vault/export': typeof ApiUserVaultExportRoute
   '/api_/wallet/$kind/$id': typeof ApiWalletKindIdRoute
   '/api_/wallet/render/hero.png': typeof ApiWalletRenderHeroDotpngRoute
+  '/api_/wallet/render/premium-logo.png': typeof ApiWalletRenderPremiumLogoDotpngRoute
   '/support/workspace/getting-started/invite-team': typeof SupportWorkspaceGettingStartedInviteTeamRoute
   '/support/workspace/getting-started/setup-business-account': typeof SupportWorkspaceGettingStartedSetupBusinessAccountRoute
   '/support/workspace/getting-started/what-is-a-workspace': typeof SupportWorkspaceGettingStartedWhatIsAWorkspaceRoute
@@ -4019,6 +4029,7 @@ export interface FileRouteTypes {
     | '/api/user/vault/export'
     | '/api/wallet/$kind/$id'
     | '/api/wallet/render/hero.png'
+    | '/api/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -4396,6 +4407,7 @@ export interface FileRouteTypes {
     | '/api/user/vault/export'
     | '/api/wallet/$kind/$id'
     | '/api/wallet/render/hero.png'
+    | '/api/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -4791,6 +4803,7 @@ export interface FileRouteTypes {
     | '/api_/user/vault/export'
     | '/api_/wallet/$kind/$id'
     | '/api_/wallet/render/hero.png'
+    | '/api_/wallet/render/premium-logo.png'
     | '/support/workspace/getting-started/invite-team'
     | '/support/workspace/getting-started/setup-business-account'
     | '/support/workspace/getting-started/what-is-a-workspace'
@@ -5026,6 +5039,7 @@ export interface RootRouteChildren {
   ApiUserVaultExportRoute: typeof ApiUserVaultExportRoute
   ApiWalletKindIdRoute: typeof ApiWalletKindIdRoute
   ApiWalletRenderHeroDotpngRoute: typeof ApiWalletRenderHeroDotpngRoute
+  ApiWalletRenderPremiumLogoDotpngRoute: typeof ApiWalletRenderPremiumLogoDotpngRoute
   ApiPublicBookingsIdActionRoute: typeof ApiPublicBookingsIdActionRoute
   ApiWalletRenderCardIdHeroDotpngRoute: typeof ApiWalletRenderCardIdHeroDotpngRoute
   ApiWalletRenderCardIdVersionFileRoute: typeof ApiWalletRenderCardIdVersionFileRoute
@@ -7616,6 +7630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWalletRenderHeroDotpngRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api_/wallet/render/premium-logo.png': {
+      id: '/api_/wallet/render/premium-logo.png'
+      path: '/api/wallet/render/premium-logo.png'
+      fullPath: '/api/wallet/render/premium-logo.png'
+      preLoaderRoute: typeof ApiWalletRenderPremiumLogoDotpngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/support/workspace/getting-started/invite-team': {
       id: '/support/workspace/getting-started/invite-team'
       path: '/workspace/getting-started/invite-team'
@@ -8586,6 +8607,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiUserVaultExportRoute: ApiUserVaultExportRoute,
   ApiWalletKindIdRoute: ApiWalletKindIdRoute,
   ApiWalletRenderHeroDotpngRoute: ApiWalletRenderHeroDotpngRoute,
+  ApiWalletRenderPremiumLogoDotpngRoute: ApiWalletRenderPremiumLogoDotpngRoute,
   ApiPublicBookingsIdActionRoute: ApiPublicBookingsIdActionRoute,
   ApiWalletRenderCardIdHeroDotpngRoute: ApiWalletRenderCardIdHeroDotpngRoute,
   ApiWalletRenderCardIdVersionFileRoute: ApiWalletRenderCardIdVersionFileRoute,
