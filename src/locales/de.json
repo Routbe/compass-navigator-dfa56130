@@ -1782,5 +1782,35 @@
   "workspace.role.owner": "Inhaber",
   "workspace.role.viewer": "Betrachter",
   "workspace.switch": "Workspace wechseln",
-  "workspace.switchError": "Workspace konnte nicht gewechselt werden."
+  "workspace.switchError": "Workspace konnte nicht gewechselt werden.",
+  "shareWidget.shareTo": "Teilen auf",
+  "shareWidget.storyHint": "Tippe auf den Link",
+  "shareWidget.linkReady": "Link kopiert – füge ihn als Link-Sticker ein",
+  "shareWidget.tappableNote": "Dein Link wird automatisch kopiert. Bei Snapchat hängt er sofort an deinem Snap; bei Instagram fügst du ihn als Link-Sticker ein, damit alle darauf tippen können.",
+  "shareWidget.story.hub": "Schau dir mein ROUT an",
+  "shareWidget.story.ask": "Schick mir eine anonyme Frage",
+  "shareWidget.story.donate": "Unterstütze mich mit einer Spende",
+  "shareWidget.story.tip": "Gib mir ein Trinkgeld",
+  "shareWidget.story.booking": "Buche einen Termin mit mir",
+  "shareWidget.story.live": "Schau vorbei, ich bin live",
+  "shareWidget.platform.snapchat": "Snapchat",
+  "shareWidget.platform.instagram": "Instagram",
+  "shareWidget.platform.whatsapp": "WhatsApp",
+  "shareWidget.platform.more": "Mehr",
+  "shareWidget.guide.next": "Nächster Schritt",
+  "shareWidget.guide.go": "Verstanden, teilen!",
+  "shareWidget.guide.snapchat.title": "So kommt dein Link in deine Snapchat-Story",
+  "shareWidget.guide.snapchat.steps": [
+    "Snapchat öffnet sich mit deinem Link bereits angehängt.",
+    "Bild dazu? Wähle es aus deiner Galerie.",
+    "Tippe auf Story zum Posten.",
+    "Zuschauer tippen auf den Link und landen auf deiner Seite."
+  ],
+  "shareWidget.guide.instagram.title": "So fügst du den Link zu deiner Instagram-Story hinzu",
+  "shareWidget.guide.instagram.steps": [
+    "Dein Link ist kopiert. Wähle Instagram-Story im Teilen-Menü.",
+    "Tippe oben auf das Sticker-Symbol.",
+    "Wähle den Link-Sticker und füge deinen Link ein.",
+    "Platziere den Sticker und teile deine Story."
+  ]
 }

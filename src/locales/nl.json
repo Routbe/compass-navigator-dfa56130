@@ -1782,5 +1782,35 @@
   "workspace.role.owner": "Eigenaar",
   "workspace.role.viewer": "Kijker",
   "workspace.switch": "Wissel van workspace",
-  "workspace.switchError": "Wisselen lukte niet."
+  "workspace.switchError": "Wisselen lukte niet.",
+  "shareWidget.shareTo": "Delen naar",
+  "shareWidget.storyHint": "Tik op de link",
+  "shareWidget.linkReady": "Link gekopieerd — plak hem als Link-sticker",
+  "shareWidget.tappableNote": "Je link wordt automatisch gekopieerd. Op Snapchat hangt hij meteen aan je snap; op Instagram plak je hem als Link-sticker zodat iedereen erop kan tikken.",
+  "shareWidget.story.hub": "Bekijk mijn ROUT",
+  "shareWidget.story.ask": "Stuur me anoniem een vraag",
+  "shareWidget.story.donate": "Steun mij met een donatie",
+  "shareWidget.story.tip": "Geef me een fooi",
+  "shareWidget.story.booking": "Boek een afspraak met mij",
+  "shareWidget.story.live": "Kom kijken, ik ben live",
+  "shareWidget.platform.snapchat": "Snapchat",
+  "shareWidget.platform.instagram": "Instagram",
+  "shareWidget.platform.whatsapp": "WhatsApp",
+  "shareWidget.platform.more": "Meer",
+  "shareWidget.guide.next": "Volgende stap",
+  "shareWidget.guide.go": "Begrijpen, delen!",
+  "shareWidget.guide.snapchat.title": "Zo komt je link op je Snapchat-verhaal",
+  "shareWidget.guide.snapchat.steps": [
+    "Snapchat opent met je link al aan je snap vast.",
+    "Wil je de afbeelding erbij? Kies hem uit je camerarol.",
+    "Tik op Verhaal om te posten.",
+    "Kijkers tikken op de link en komen meteen op je pagina."
+  ],
+  "shareWidget.guide.instagram.title": "Zo voeg je de link toe aan je Instagram-verhaal",
+  "shareWidget.guide.instagram.steps": [
+    "Je link is al gekopieerd. Kies Instagram-verhaal in het deelmenu.",
+    "Tik bovenaan op het sticker-icoon.",
+    "Kies de Link-sticker en plak je link.",
+    "Plaats de sticker en deel je verhaal."
+  ]
 }

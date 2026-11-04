@@ -1782,5 +1782,35 @@
   "workspace.role.owner": "Owner",
   "workspace.role.viewer": "Viewer",
   "workspace.switch": "Switch workspace",
-  "workspace.switchError": "Could not switch workspace."
+  "workspace.switchError": "Could not switch workspace.",
+  "shareWidget.shareTo": "Share to",
+  "shareWidget.storyHint": "Tap the link",
+  "shareWidget.linkReady": "Link copied — paste it as a Link sticker",
+  "shareWidget.tappableNote": "Your link is copied automatically. On Snapchat it's attached to your snap right away; on Instagram paste it as a Link sticker so anyone can tap it.",
+  "shareWidget.story.hub": "Check out my ROUT",
+  "shareWidget.story.ask": "Send me an anonymous question",
+  "shareWidget.story.donate": "Support me with a donation",
+  "shareWidget.story.tip": "Leave me a tip",
+  "shareWidget.story.booking": "Book a meeting with me",
+  "shareWidget.story.live": "Come watch, I'm live",
+  "shareWidget.platform.snapchat": "Snapchat",
+  "shareWidget.platform.instagram": "Instagram",
+  "shareWidget.platform.whatsapp": "WhatsApp",
+  "shareWidget.platform.more": "More",
+  "shareWidget.guide.next": "Next step",
+  "shareWidget.guide.go": "Got it, share!",
+  "shareWidget.guide.snapchat.title": "How your link gets on your Snapchat story",
+  "shareWidget.guide.snapchat.steps": [
+    "Snapchat opens with your link already attached.",
+    "Want the image too? Pick it from your camera roll.",
+    "Tap Story to post.",
+    "Viewers tap the link and land on your page."
+  ],
+  "shareWidget.guide.instagram.title": "How to add the link to your Instagram story",
+  "shareWidget.guide.instagram.steps": [
+    "Your link is copied. Choose Instagram Story in the share menu.",
+    "Tap the sticker icon at the top.",
+    "Choose the Link sticker and paste your link.",
+    "Place the sticker and share your story."
+  ]
 }
