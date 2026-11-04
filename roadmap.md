@@ -1,5 +1,11 @@
 # ROUT repository import
 
+## Homepage and About refinement
+- [ ] Review requested animation/UI references and preserve ROUT identity.
+- [ ] Refine black-only homepage with responsive, reduced-motion-aware animation.
+- [ ] Improve About page presentation in the standard ROUT light/dark theme; leave developer identity distinct.
+- [ ] Verify mobile/desktop rendering, navigation and affected tests.
+
 ## Studio usability
 - [x] Connect Widgets folder and remove nested widget controls from Links and components; add NL/EN/FR/DE labels.
 - [x] Keep fallback Inbox, Pinboard and Badges below the profile block grid.
