@@ -93,7 +93,7 @@ export function WorkspaceSwitcher({ alwaysShow = false }: { alwaysShow?: boolean
         <ChevronsUpDown className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" collisionPadding={16} className="max-h-[70vh] w-[calc(100vw-2rem)] max-w-64 overflow-y-auto">
-        <DropdownMenuItem onClick={() => switchTo(null)}>
+        <DropdownMenuItem onSelect={() => void switchTo(null)}>
           <User className="mr-2 h-4 w-4" /> {t("workspace.personal")}
           {!active && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
@@ -102,7 +102,7 @@ export function WorkspaceSwitcher({ alwaysShow = false }: { alwaysShow?: boolean
             <DropdownMenuSeparator />
             <DropdownMenuLabel className="text-xs text-muted-foreground">{t("workspace.list")}</DropdownMenuLabel>
             {data.workspaces.map((w) => (
-              <DropdownMenuItem key={w.id} onClick={() => switchTo(w.id)}>
+              <DropdownMenuItem key={w.id} onSelect={() => void switchTo(w.id)}>
                 <WorkspaceIcon avatarUrl={w.avatarUrl} icon={w.icon} category={w.category} className="mr-2" />
                 <span className="truncate">{w.name}</span>
                 <span className="ml-auto pl-2 text-xs text-muted-foreground">{t(`workspace.role.${w.role}`)}</span>
