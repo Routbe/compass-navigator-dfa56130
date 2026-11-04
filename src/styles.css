@@ -1858,6 +1858,57 @@ html[data-liquid] [style*="--lg-filter"] { backdrop-filter: var(--lg-filter) !im
   backdrop-filter: none;
   padding-inline: 0;
 }
+/* ROUT editorial polish: homepage is obsidian; About inherits the user's theme. */
+.gateway-editorial .infra-hero { min-height: min(820px, calc(100svh - 110px)); }
+.gateway-editorial .infra-hero-content { min-height: 580px; padding-top: 58px; padding-bottom: 120px; }
+.gateway-editorial .infra-title { font-size: 112px; }
+.gateway-editorial .infra-hero-content > p:first-child { letter-spacing: 0; }
+.gateway-editorial .infra-hero-content > p:nth-of-type(3) { max-width: 570px; }
+.gateway-editorial .infra-command { border-top-color: var(--chamfer-light); background: color-mix(in oklab, var(--infra-cavity) 88%, transparent); backdrop-filter: blur(24px); }
+.gateway-editorial .story-index a { transition: color 180ms, padding 180ms; }
+.gateway-editorial .story-index a:hover { color: var(--color-primary); padding-inline-start: 6px; }
+.gateway-editorial .story-chapter-number { color: color-mix(in oklab, var(--color-primary) 30%, var(--color-background)); }
+.gateway-editorial .story-more-item { transition: border-color 200ms, transform 200ms; }
+.gateway-editorial .story-more-item:hover { border-color: var(--color-primary); transform: translateY(-3px); }
+.docs-about { --about-rule: hsl(var(--foreground) / .16); --color-docs-link: hsl(var(--foreground)); }
+.docs-about .docs-header { background: color-mix(in oklab, var(--color-background) 92%, transparent); border-color: var(--about-rule); }
+.docs-about .docs-reading-column { max-width: 820px; }
+.docs-about .docs-prose { font-size: 16px; line-height: 1.9; }
+.docs-about .docs-prose h1 { font-size: 64px; line-height: 1.08; margin-top: 20px; max-width: 760px; }
+.docs-about .docs-prose h1 + p { font-size: 21px; line-height: 1.6; color: var(--color-muted-foreground); padding-bottom: 36px; border-bottom: 1px solid var(--about-rule); }
+.docs-about .docs-prose h2 { font-size: 32px; margin-top: 56px; margin-bottom: 20px; }
+.docs-about .docs-prose > p { max-width: 720px; }
+.docs-about .docs-nav-link { padding-block: 10px; transition: color 160ms, border-color 160ms; }
+.docs-about .docs-nav-link { color: hsl(var(--muted-foreground)); }
+.docs-about .docs-nav-link[aria-current="page"] { color: hsl(var(--foreground)); border-color: hsl(var(--foreground)); }
+.docs-about .docs-nav-link[aria-current="page"] { border-left-width: 2px; font-weight: 500; }
+.docs-about .docs-article-link { border-radius: 6px; background: transparent; box-shadow: none; }
+.about-object-study { margin: 0 0 34px; }
+.about-object-study img { width: 100%; aspect-ratio: 1.875; object-fit: cover; border-radius: 6px; }
+.about-object-study figcaption { margin-top: 12px; font-size: 10px; }
+@media (max-width: 639px) {
+  .gateway-editorial .infra-hero { min-height: 0; }
+  .gateway-editorial .infra-hero-content { min-height: 590px; padding-top: 24px; padding-bottom: 72px; }
+  .gateway-editorial .infra-title { font-size: 72px; }
+  .gateway-editorial .infra-hero-content > p:nth-of-type(3) { font-size: 13px; line-height: 1.65; }
+  .gateway-editorial .infra-hero-content .omni-bar { margin-top: 20px; }
+  .gateway-editorial .infra-hero-content > div { margin-top: 14px; }
+  .gateway-editorial .sovereign-domains { bottom: 24px; }
+  .docs-about .docs-prose h1 { font-size: 42px; }
+  .docs-about .docs-prose h1 + p { font-size: 18px; }
+  .docs-about .docs-prose h2 { font-size: 28px; margin-top: 40px; }
+  .about-object-study { margin-bottom: 24px; }
+}
+@media (min-width: 640px) and (max-height: 740px) {
+  .gateway-editorial .infra-hero { min-height: 0; }
+  .gateway-editorial .infra-hero-content { min-height: 420px; padding-block: 16px 64px; }
+  .gateway-editorial .infra-title { font-size: 76px; }
+  .gateway-editorial .infra-hero-content .omni-bar { margin-top: 16px; }
+  .gateway-editorial .infra-hero-content > div { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gateway-editorial .story-index a, .gateway-editorial .story-more-item { transition: none; transform: none; }
+}
 @media (min-width: 640px) and (max-height: 700px) {
   .infra-hero { min-height: 500px; }
   .infra-hero-content { min-height: 390px; padding-block: 18px 75px; }
